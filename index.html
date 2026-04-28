@@ -6,7 +6,7 @@
   <title>Sistemas Energéticos en Natación</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     /* ─── Reset & variables ─── */
     *, *::before, *::after {
@@ -16,31 +16,34 @@
     }
 
     :root {
-      /* ── Paleta azul marino / aqua ── */
-      --color-primary:     #023e8a;
-      --color-primary-mid: #0077b6;
-      --color-secondary:   #0096c7;
-      --color-accent:      #48cae4;
-      --color-accent-lt:   #caf0f8;
-      --color-bg:          #f0f8ff;
-      --color-surface:     #ffffff;
-      --color-text:        #03045e;
-      --color-text-muted:  #5c677d;
-      --color-border:      #d0eaf8;
+      /* ── Paleta: colorhunt.co/palette/222831393e46ffd369eeeeee ── */
+      --color-bg:          #222831;
+      --color-surface:     #393E46;
+      --color-surface-2:   #2e333b;
+      --color-accent:      #FFD369;
+      --color-accent-lt:   rgba(255, 211, 105, 0.12);
+      --color-text:        #EEEEEE;
+      --color-text-muted:  rgba(238, 238, 238, 0.60);
+      --color-border:      rgba(255, 211, 105, 0.18);
+      /* Semánticos (usan el acento dorado como "primario") */
+      --color-primary:     #FFD369;
+      --color-primary-mid: #FFC53D;
+      --color-secondary:   #FFB347;
       /* ── Sistemas energéticos ── */
-      --color-pcr:         #e63946;
-      --color-glu:         #f4a261;
-      --color-oxi:         #2a9d8f;
+      --color-pcr:         #FF6B81;
+      --color-glu:         #FFB347;
+      --color-oxi:         #4ECDC4;
       /* ── Layout ── */
       --nav-height:  64px;
       --max-width:   1100px;
       --radius:      8px;
       --radius-lg:   14px;
-      --shadow-sm:   0 1px 4px rgba(2, 62, 138, 0.08);
-      --shadow:      0 3px 14px rgba(2, 62, 138, 0.13);
-      --shadow-lg:   0 8px 28px rgba(2, 62, 138, 0.18);
+      --shadow-sm:   0 1px 6px rgba(0, 0, 0, 0.35);
+      --shadow:      0 4px 16px rgba(0, 0, 0, 0.45);
+      --shadow-lg:   0 10px 32px rgba(0, 0, 0, 0.55);
       --transition:  0.25s ease;
-      --font:        'Inter', 'Segoe UI', system-ui, sans-serif;
+      --font:        'Space Grotesk', system-ui, sans-serif;
+      --font-mono:   'Roboto Mono', 'Courier New', monospace;
     }
 
     html {
@@ -55,6 +58,7 @@
       line-height: 1.7;
       font-size: 1rem;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ─── Navigation ─── */
@@ -64,45 +68,47 @@
       left: 0;
       right: 0;
       height: var(--nav-height);
-      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-mid) 100%);
-      color: #fff;
+      background: linear-gradient(90deg, #222831 0%, #2e333b 100%);
+      border-bottom: 1px solid rgba(255, 211, 105, 0.15);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
       z-index: 1000;
       box-shadow: var(--shadow-sm);
-      transition: box-shadow 0.3s ease;
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
     }
 
     nav.scrolled {
-      box-shadow: 0 4px 20px rgba(2, 62, 138, 0.28);
+      border-bottom-color: rgba(255, 211, 105, 0.4);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
     nav .nav-brand {
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--color-accent);
+      font-size: 0.95rem;
       letter-spacing: 0.02em;
+    }
+
+    nav ul li a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: var(--color-accent);
+      text-decoration: none;
     }
 
     nav ul {
       list-style: none;
       display: flex;
       gap: 1.5rem;
-    }
-
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      opacity: 0.85;
-      transition: opacity var(--transition);
-    }
-
-    nav ul li a:hover,
-    nav ul li a.active {
-      opacity: 1;
-      text-decoration: underline;
     }
 
     /* ─── Tipografía ─── */
@@ -123,7 +129,7 @@
 
     strong { color: var(--color-text); font-weight: 600; }
 
-    em { color: var(--color-primary-mid); }
+    em { color: var(--color-text-muted); font-style: italic; }
 
     /* ─── Main content ─── */
     main#content {
@@ -138,23 +144,23 @@
 
     /* ─── Footer ─── */
     footer {
-      background-color: var(--color-primary);
-      color: rgba(255, 255, 255, 0.8);
+      background: #1a1e25;
+      border-top: 1px solid rgba(255, 211, 105, 0.15);
       text-align: center;
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       font-size: 0.85rem;
+      font-family: var(--font-mono);
     }
 
-    footer p { color: rgba(255, 255, 255, 0.8); }
+    footer p { color: var(--color-text-muted); }
+    footer strong { color: var(--color-accent); }
 
     footer a {
       color: var(--color-accent);
       text-decoration: none;
     }
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+    footer a:hover { text-decoration: underline; }
 
     /* ─── Utilities (disponibles para secciones futuras) ─── */
     .card {
@@ -166,10 +172,12 @@
 
     .section-title {
       font-size: 1.6rem;
-      color: var(--color-primary);
+      color: var(--color-accent);
       margin-bottom: 1rem;
-      border-bottom: 3px solid var(--color-secondary);
+      border-bottom: 2px solid rgba(255, 211, 105, 0.3);
       padding-bottom: 0.4rem;
+      font-family: var(--font-mono);
+      letter-spacing: -0.01em;
     }
 
     .btn {
@@ -184,7 +192,7 @@
 
     .btn-primary {
       background-color: var(--color-primary);
-      color: #fff;
+      color: #222831;
     }
 
     .btn-primary:hover {
@@ -194,12 +202,22 @@
 
     /* ─── Hero ─── */
     .hero {
-      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-      color: #fff;
-      border-radius: var(--radius);
+      background: linear-gradient(135deg, #2e333b 0%, #393E46 100%);
+      border: 1px solid rgba(255, 211, 105, 0.18);
+      border-radius: var(--radius-lg);
       padding: 3.5rem 2.5rem;
       margin-bottom: 3rem;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% -20%, rgba(255,211,105,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .hero h1 {
@@ -207,11 +225,12 @@
       font-weight: 800;
       margin-bottom: 1rem;
       letter-spacing: -0.01em;
+      color: var(--color-accent);
     }
 
     .hero p {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.93);
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
       max-width: 700px;
       margin: 0 auto;
     }
@@ -271,8 +290,8 @@
       margin-bottom: 0.6rem;
     }
 
-    .badge-anaerobic { background: #fde8ea; color: #c1121f; }
-    .badge-aerobic   { background: #d8f3dc; color: #1b4332; }
+    .badge-anaerobic { background: rgba(255,107,129,0.18); color: #FF6B81; border: 1px solid rgba(255,107,129,0.3); }
+    .badge-aerobic   { background: rgba(78,205,196,0.15);  color: #4ECDC4; border: 1px solid rgba(78,205,196,0.3); }
 
     .system-card p {
       font-size: 0.9rem;
@@ -298,11 +317,12 @@
     }
 
     thead tr {
-      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      background: linear-gradient(90deg, #2e333b 0%, #393E46 100%);
+      border-bottom: 2px solid var(--color-accent);
     }
 
     thead th {
-      color: #fff;
+      color: var(--color-accent);
       padding: 0.85rem 1.1rem;
       text-align: left;
       font-weight: 600;
@@ -320,7 +340,7 @@
       transition: background 0.15s ease;
     }
 
-    tbody tr:nth-child(even) { background: #f4fbff; }
+    tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
     tbody tr:hover { background: var(--color-accent-lt); }
 
     tbody td {
@@ -344,14 +364,14 @@
 
     /* ─── Controversy highlight ─── */
     .controversy-box {
-      background: #fff8e1;
-      border-left: 4px solid #f4a261;
+      background: rgba(255, 179, 71, 0.08);
+      border-left: 4px solid var(--color-glu);
       border-radius: 0 var(--radius) var(--radius) 0;
       padding: 1.2rem 1.5rem;
       margin: 1.5rem 0;
     }
 
-    .controversy-box p { color: #5c4a1e; margin-bottom: 0.5rem; }
+    .controversy-box p { color: var(--color-text-muted); margin-bottom: 0.5rem; }
     .controversy-box p:last-child { margin-bottom: 0; }
 
     /* ─── Numbered problem list ─── */
@@ -375,7 +395,7 @@
       width: 2rem;
       height: 2rem;
       background: var(--color-primary);
-      color: #fff;
+      color: #222831;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -389,12 +409,12 @@
 
     /* ─── Solution box ─── */
     .solution-box {
-      background: #e8f5e9;
-      border-left: 4px solid #2d6a4f;
+      background: rgba(78, 205, 196, 0.08);
+      border-left: 4px solid var(--color-oxi);
       border-radius: 0 var(--radius) var(--radius) 0;
       padding: 1.2rem 1.5rem;
       margin: 1.5rem 0;
-      color: #1b4332;
+      color: var(--color-text-muted);
     }
 
     /* ─── Limitations list ─── */
@@ -430,20 +450,21 @@
 
     /* ─── Conclusion card ─── */
     .conclusion-card {
-      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
-      color: #fff;
-      border-radius: var(--radius);
+      background: linear-gradient(135deg, #2e333b 0%, #393E46 100%);
+      border: 1px solid rgba(255, 211, 105, 0.25);
+      border-radius: var(--radius-lg);
       padding: 2rem 2.5rem;
       margin-top: 1.5rem;
     }
 
-    .conclusion-card p { color: rgba(255, 255, 255, 0.93); margin-bottom: 0.8rem; }
+    .conclusion-card p { color: var(--color-text-muted); margin-bottom: 0.8rem; }
     .conclusion-card p:last-child { margin-bottom: 0; }
     .conclusion-card .signature {
       margin-top: 1.2rem;
       font-weight: 700;
       font-style: italic;
-      opacity: 1;
+      font-family: var(--font-mono);
+      color: var(--color-accent);
     }
 
     /* ─── Calculadoras ─── */
@@ -506,25 +527,25 @@
     .form-group input,
     .form-group select {
       padding: 0.55rem 0.8rem;
-      border: 1.5px solid #cce4f0;
+      border: 1.5px solid rgba(255, 211, 105, 0.25);
       border-radius: var(--radius);
       font-size: 0.95rem;
       color: var(--color-text);
-      background: #f8fcff;
+      background: var(--color-surface-2);
       transition: border-color var(--transition);
       outline: none;
     }
 
     .form-group input:focus,
     .form-group select:focus {
-      border-color: var(--color-secondary);
-      background: #fff;
+      border-color: var(--color-accent);
+      background: #353b43;
     }
 
     .calc-btn {
       padding: 0.6rem 1.6rem;
       background: var(--color-primary);
-      color: #fff;
+      color: #222831;
       border: none;
       border-radius: var(--radius);
       font-size: 0.95rem;
@@ -541,7 +562,7 @@
     .calc-results {
       margin-top: 1.4rem;
       padding-top: 1.2rem;
-      border-top: 1px solid #e2eef7;
+      border-top: 1px solid var(--color-border);
       display: none;
     }
 
@@ -618,7 +639,7 @@
     }
 
     .calc-error {
-      color: #c1121f;
+      color: var(--color-pcr);
       font-size: 0.88rem;
       margin-top: 0.5rem;
       display: none;
@@ -635,7 +656,7 @@
       height: 54px;
       border-radius: 50%;
       background: var(--color-primary);
-      color: #fff;
+      color: #222831;
       border: none;
       cursor: pointer;
       box-shadow: var(--shadow-lg);
@@ -652,7 +673,7 @@
     .bib-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(2, 62, 138, 0.35);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(3px);
       z-index: 1100;
     }
@@ -700,7 +721,7 @@
       line-height: 1;
     }
 
-    .bib-close:hover { background: #f0f8ff; color: var(--color-text); }
+    .bib-close:hover { background: rgba(255, 211, 105, 0.12); color: var(--color-accent); }
 
     .bib-list {
       padding-left: 1.3rem;
@@ -715,7 +736,7 @@
     }
 
     .bib-list::-webkit-scrollbar { width: 5px; }
-    .bib-list::-webkit-scrollbar-track { background: #f0f8ff; border-radius: 99px; }
+    .bib-list::-webkit-scrollbar-track { background: var(--color-surface-2); border-radius: 99px; }
     .bib-list::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 99px; }
 
     .bib-list li { margin-bottom: 0.7rem; }
@@ -962,7 +983,7 @@
       <p>Los datos de Rodríguez y Mader son para tiempos de élite masculinos en crol. Para una nadadora de 100 braza en 1:15, ese tiempo se aleja del modelo original. La solución: <strong>modelar una función continua</strong> a partir de los puntos de la tabla anterior. Con esa función podemos obtener el valor exacto para cualquier instante de esfuerzo.</p>
       <p>Las ecuaciones resultantes (ajuste en MatLAB, R² ≥ 0,995), donde <em>x</em> es el tiempo total de la prueba en segundos, son:</p>
 
-      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+      <div class="card" style="font-family:var(--font-mono);font-size:.9rem;line-height:2.1;">
         <div><strong>ATP-PCr:</strong> 424,1 · x<sup>−0,789</sup> + 0,8296</div>
         <div><strong>Sistema Glucolítico:</strong> 239,7 · x<sup>−0,4676</sup> + 1,072</div>
         <div><strong>Sistema Oxidativo:</strong> −585,6 · x<sup>−0,6017</sup> + 95,78</div>
@@ -971,7 +992,7 @@
       <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Problema 3: diferentes estilos</h3>
       <p>¿Requiere la misma cantidad de energía nadar 75 segundos a crol que a braza? La respuesta es no. Gracias a <strong>Capelli y colaboradores</strong> sabemos que el coste energético varía significativamente entre estilos. Sus ecuaciones (donde <em>x</em> es la velocidad en m/s):</p>
 
-      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+      <div class="card" style="font-family:var(--font-mono);font-size:.9rem;line-height:2.1;">
         <div><strong>Mariposa:</strong> 0,234 · 10<sup>0,547x</sup></div>
         <div><strong>Espalda:</strong> 0,270 · 10<sup>0,491x</sup></div>
         <div><strong>Braza:</strong> 0,548 · 10<sup>0,355x</sup></div>
