@@ -647,6 +647,110 @@
 
     .calc-error.visible { display: block; }
 
+    /* ─── Algorithm steps ─── */
+    .algo-steps {
+      list-style: none;
+      margin: 1.2rem 0;
+    }
+
+    .algo-steps li {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      margin-bottom: 0.55rem;
+      padding: 0.7rem 1rem;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      border-left: 3px solid var(--color-accent);
+    }
+
+    .algo-steps .step-num {
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: var(--color-accent);
+      color: #222831;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+      margin-top: 0.1rem;
+    }
+
+    .algo-steps .step-text { font-size: 0.88rem; color: var(--color-text-muted); line-height: 1.65; }
+    .algo-steps .step-text strong { color: var(--color-text); }
+
+    /* ─── Detail box (inline explainer inside lists) ─── */
+    .detail-box {
+      margin-top: 0.55rem;
+      padding: 0.55rem 0.8rem;
+      background: var(--color-surface-2);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      border-left: 2px solid var(--color-accent);
+      line-height: 1.6;
+    }
+
+    .detail-box strong { color: var(--color-accent); }
+
+    /* ─── Applications grid ─── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.5rem;
+    }
+
+    .app-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition), transform var(--transition);
+    }
+
+    .app-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .app-card-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      margin-bottom: 0.7rem;
+    }
+
+    .tag-plan { background: rgba(255, 211, 105, 0.15); color: var(--color-accent); }
+    .tag-eval { background: rgba(78, 205, 196, 0.15);  color: var(--color-oxi); }
+    .tag-nutr { background: rgba(255, 107, 129, 0.15); color: var(--color-pcr); }
+    .tag-comb { background: rgba(255, 179, 71, 0.15);  color: var(--color-glu); }
+
+    .app-card h4 {
+      color: var(--color-text);
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+    }
+
+    .app-card p {
+      font-size: 0.87rem;
+      color: var(--color-text-muted);
+      margin: 0;
+      line-height: 1.65;
+    }
+
+    .app-card .detail-box { margin-top: 0.9rem; }
+
     /* ─── Bibliografía flotante ─── */
     .fab {
       position: fixed;
@@ -818,8 +922,9 @@
     <span class="nav-brand">Sistemas Energéticos en Natación</span>
     <ul>
       <li><a href="#sistemas">Sistemas</a></li>
-      <li><a href="#controversia">Controversia</a></li>
+      <li><a href="#controversia">Problemas</a></li>
       <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#aplicaciones">Aplicaciones</a></li>
       <li><a href="#calculadoras">Calculadoras</a></li>
       <li><a href="#limitaciones">Limitaciones</a></li>
     </ul>
@@ -901,8 +1006,8 @@
 
     <!-- ── CONTROVERSIA ── -->
     <section id="controversia" class="section">
-      <h2 class="section-title">La Controversia</h2>
-      <p>El nadador debe obtener energía —mucha, cuanta más mejor— de los sistemas energéticos predominantes en su modalidad. Maglischo, Navarro y un sinfín de autores reconocidos han escrito al respecto. Esta es una tabla resumen de sus resultados:</p>
+      <h2 class="section-title">Los Problemas</h2>
+      <p>El nadador debe saber de qué sistemas energéticos depende su prueba para entrenar exactamente lo que necesita. Maglischo, Navarro y un sinfín de autores han publicado estimaciones al respecto. Esta tabla recoge el resumen de la literatura tal y como lo presentan Rodríguez y Mader:</p>
 
       <div class="table-wrap">
         <table>
@@ -926,32 +1031,41 @@
       </div>
 
       <div class="controversy-box">
-        <p><strong>¿Veis el problema?</strong> Yo creo que hay varios:</p>
+        <p><strong>¿Veis el problema?</strong> Yo veo tres, y son lo suficientemente serios como para cuestionar la utilidad práctica de esta tabla.</p>
       </div>
 
       <ul class="problem-list">
         <li>
           <div class="num">1</div>
-          <div class="text"><strong>No coinciden.</strong> El rango en el que se mueven es demasiado grande para resultar de utilidad. ¿Es el 200 libres una prueba eminentemente anaeróbica, o por el contrario prima el metabolismo aeróbico? Resulta imposible dar una respuesta particular; diferentes deportistas pueden llegar al mismo destino de formas distintas, ¿pero cómo es en general la prueba?</div>
+          <div class="text">
+            <strong>Los estudios no se ponen de acuerdo.</strong> Los rangos son tan amplios que resulta imposible tomar decisiones concretas. Fíjate en los 50 metros: el sistema glucolítico aparece con un 2% en algunos estudios y con un 80% en otros. Un rango de 78 puntos porcentuales no es una referencia; es una incógnita.
+            <div class="detail-box">La causa es metodológica: unos autores cuantifican el VO₂ consumido, otros miden la acumulación de lactato en sangre, otros emplean modelos computacionales. Cada método tiene supuestos distintos, trabaja con poblaciones distintas (élite vs. recreacional, hombres vs. mujeres, diferentes edades) y arroja resultados incomparables. El problema no es que estén equivocados; es que <strong>no hay consenso sobre cómo medir bien</strong>.</div>
+          </div>
         </li>
         <li>
           <div class="num">2</div>
-          <div class="text"><strong>Usan distancias</strong> en vez de tiempo. Esto puede ser práctico en rasgos generales, pero no es preciso en casos concretos. La contribución del sistema ATP-PCr no es la misma para un 100 libres en 46 segundos que para uno en 1 minuto y 10 segundos, aunque sea la misma distancia y estilo.</div>
+          <div class="text">
+            <strong>Usan distancias en vez de tiempo.</strong> La demanda energética depende de la duración del esfuerzo, no de los metros recorridos. Un nadador élite que hace los 100 libres en 46 segundos y uno que tarda 1:10 están nadando la misma distancia, pero son esfuerzos fisiológicamente completamente distintos.
+            <div class="detail-box">En 46 segundos, el sistema ATP-PCr todavía tiene capacidad de aporte significativa; en 70 segundos, ese sistema ya se ha agotado por completo. El glucolítico ha alcanzado su pico y el aeróbico lleva rato contribuyendo. Usar la misma referencia de "100 metros" para ambos nadadores puede llevar a planificaciones que no se ajustan a la realidad fisiológica de ninguno de los dos.</div>
+          </div>
         </li>
         <li>
           <div class="num">3</div>
-          <div class="text"><strong>Hablan exclusivamente de nado crol y en hombres.</strong> Sabemos que en mujeres la oxidación de lípidos se ve más favorecida frente a la de carbohidratos que en hombres, pero es una incógnita cómo se comportan respecto a los otros sistemas en natación.</div>
+          <div class="text">
+            <strong>Casi todo está hecho para crol masculino.</strong> El 100% de los modelos existentes se basan en crol con hombres. Pero la natación competitiva tiene cuatro estilos, y cada uno tiene un coste energético diferente. Si eres especialista en braza, mariposa o espalda, la tabla de arriba simplemente no habla de ti.
+            <div class="detail-box">Esto no es un detalle menor: la braza tiene un coste energético de <strong>aproximadamente el doble</strong> que el crol a velocidades similares. Si un entrenador usa los datos de crol para planificar el trabajo de un bracista, estará subestimando sistemáticamente el coste del esfuerzo. Esto puede traducirse en errores de carga, recuperación insuficiente o enfasis en los sistemas energéticos equivocados.</div>
+          </div>
         </li>
       </ul>
     </section>
 
     <!-- ── SOLUCIONES ── -->
     <section id="soluciones" class="section">
-      <h2 class="section-title">Soluciones</h2>
+      <h2 class="section-title">La Propuesta</h2>
 
-      <h3 style="color:var(--color-primary);margin-bottom:.6rem;">Problema 1: discrepancias entre autores</h3>
-      <p>La primera solución que se me ocurrió fue hacer una media, pero este enfoque podría llevar a una falacia: sin certeza de que todos los estudios tengan el mismo grado de validez, la media podría ser tan acertada como elegir un valor al azar en el rango correspondiente.</p>
-      <p>La alternativa: <strong>tener un favorito</strong>. En la literatura científica, y en especial en España y en el mundo de la natación, Fernando Navarro siempre es el primero en salir. Pero para este supuesto me inclino por <strong>Rodríguez y Mader</strong>. En su artículo <em>Energy systems in swimming</em> presentan una simulación computacional de la participación de los sistemas energéticos en nadadores de élite masculinos. Lo que me parece muy importante —y es un punto a su favor— es que <strong>incluyen marcas de tiempo</strong>:</p>
+      <h3 style="color:var(--color-primary);margin-bottom:.6rem;">Solución al Problema 1: elegir un modelo de referencia</h3>
+      <p>Lo primero que pensé fue hacer una media de todos los estudios, pero sin saber qué método es más fiable, promediar resultados dispares es casi tan arbitrario como elegir un valor al azar dentro del rango.</p>
+      <p>La alternativa es <strong>apostar por un modelo de referencia bien justificado</strong>. Mi elección es <strong>Rodríguez y Mader (2011)</strong>. Su propuesta se basa en simulación computacional validada con datos fisiológicos reales de nadadores de élite, abarca todas las distancias olímpicas y tiene coherencia interna. Lo más importante para lo que viene: <strong>incluye marcas de tiempo concretas</strong>, no solo distancias.</p>
 
       <div class="table-wrap">
         <table>
@@ -976,12 +1090,12 @@
       </div>
 
       <div class="solution-box">
-        Esto <strong>soluciona por completo el Problema 1 y facilita mucho atajar el Problema 2</strong>: ahora disponemos de valores concretos ubicados en un tiempo también concreto.
+        Estos seis puntos discretos serán la base de todo. El siguiente paso es convertirlos en una <strong>función continua</strong> que permita estimar el perfil energético para cualquier tiempo de esfuerzo posible.
       </div>
 
-      <h3 style="color:var(--color-primary);margin:.1.5rem 0 .6rem;">Problema 2: esfuerzos de diferente duración</h3>
-      <p>Los datos de Rodríguez y Mader son para tiempos de élite masculinos en crol. Para una nadadora de 100 braza en 1:15, ese tiempo se aleja del modelo original. La solución: <strong>modelar una función continua</strong> a partir de los puntos de la tabla anterior. Con esa función podemos obtener el valor exacto para cualquier instante de esfuerzo.</p>
-      <p>Las ecuaciones resultantes (ajuste en MatLAB, R² ≥ 0,995), donde <em>x</em> es el tiempo total de la prueba en segundos, son:</p>
+      <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Solución al Problema 2: función continua por regresión</h3>
+      <p>Tenemos seis puntos de la tabla de Rodríguez y Mader. El objetivo es ajustar funciones matemáticas que los conecten de forma continua para poder obtener un valor estimado para cualquier instante de esfuerzo entre ~10 y 900 segundos.</p>
+      <p>La forma elegida es <strong>y = a · x<sup>b</sup> + c</strong> (función potencial), donde <em>x</em> es el tiempo en segundos. Este tipo de curva captura bien el comportamiento fisiológico real: el sistema fosfágeno cae en picado en los primeros segundos y se estabiliza; el oxidativo asciende de forma progresiva con asíntota. Los modelos lineales o logarítmicos simples no se adaptan a estas dinámicas de la misma manera. El ajuste se realizó en MATLAB y arrojó un coeficiente de determinación <strong>R² ≥ 0,995</strong> en los tres sistemas —las funciones explican más del 99,5% de la variabilidad de los datos originales—:</p>
 
       <div class="card" style="font-family:var(--font-mono);font-size:.9rem;line-height:2.1;">
         <div><strong>ATP-PCr:</strong> 424,1 · x<sup>−0,789</sup> + 0,8296</div>
@@ -989,8 +1103,11 @@
         <div><strong>Sistema Oxidativo:</strong> −585,6 · x<sup>−0,6017</sup> + 95,78</div>
       </div>
 
-      <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Problema 3: diferentes estilos</h3>
-      <p>¿Requiere la misma cantidad de energía nadar 75 segundos a crol que a braza? La respuesta es no. Gracias a <strong>Capelli y colaboradores</strong> sabemos que el coste energético varía significativamente entre estilos. Sus ecuaciones (donde <em>x</em> es la velocidad en m/s):</p>
+      <p style="margin-top:1rem;">Con estas ecuaciones ya podemos estimar la contribución energética para cualquier nadador de crol en cualquier tiempo de esfuerzo. Un nadador que hace los 100 metros en 1:15 —tiempo que no aparece en ninguna tabla estándar— tiene ahora su perfil energético calculable.</p>
+
+      <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Solución al Problema 3: equivalencia entre estilos</h3>
+      <p>El modelo de Rodríguez y Mader solo es válido para crol. Para aplicarlo a mariposa, espalda o braza necesitamos un puente. La clave está en dos herramientas combinadas.</p>
+      <p><strong>Las ecuaciones de Capelli (1998)</strong> miden el coste energético de desplazamiento en kJ/m para cada estilo en función de la velocidad media en m/s:</p>
 
       <div class="card" style="font-family:var(--font-mono);font-size:.9rem;line-height:2.1;">
         <div><strong>Mariposa:</strong> 0,234 · 10<sup>0,547x</sup></div>
@@ -999,11 +1116,95 @@
         <div><strong>Crol:</strong> 0,228 · 10<sup>0,488x</sup></div>
       </div>
 
-      <p style="margin-top:1rem;">Con esto, el algoritmo completo compara el coste energético entre estilos usando <strong>Swimming Points</strong> como proxy de intensidad relativa, y ajusta el tiempo equivalente a crol antes de aplicar las ecuaciones de Rodríguez y Mader.</p>
+      <p style="margin-top:1rem;"><strong>Los Swimming Points (World Aquatics)</strong> permiten comparar marcas entre estilos distintos. La fórmula SP&nbsp;=&nbsp;1000&nbsp;×&nbsp;(WR/t)³ asigna puntos a cualquier marca en función del récord del mundo de esa prueba. Dos marcas con la misma puntuación representan un nivel de rendimiento relativo equivalente —aunque con costes energéticos absolutos distintos— y eso es exactamente lo que necesitamos para construir el puente entre estilos.</p>
+
+      <p>El algoritmo completo combina ambas herramientas en ocho pasos para encontrar un <em>"tiempo equivalente a crol"</em> que iguale la carga metabólica total de la prueba original:</p>
+
+      <ol class="algo-steps">
+        <li>
+          <div class="step-num">1</div>
+          <div class="step-text"><strong>Entradas del usuario:</strong> estilo de nado, distancia, tiempo empleado, récord mundial de esa prueba y récord mundial de crol en la misma distancia.</div>
+        </li>
+        <li>
+          <div class="step-num">2</div>
+          <div class="step-text"><strong>Coste energético del estilo:</strong> velocidad media v = distancia / tiempo → se aplica la ecuación de Capelli correspondiente al estilo → resultado en kJ/m.</div>
+        </li>
+        <li>
+          <div class="step-num">3</div>
+          <div class="step-text"><strong>Swimming Points de la marca:</strong> SP = 1000 × (WR_prueba / tiempo)³ → valor que cuantifica el nivel de rendimiento relativo dentro de esa especialidad.</div>
+        </li>
+        <li>
+          <div class="step-num">4</div>
+          <div class="step-text"><strong>Marca equivalente a crol:</strong> ¿Qué tiempo a crol valdría esos mismos puntos? → t_crol = WR_crol × (1000 / SP)<sup>1/3</sup>. Esta es la marca de crol que representaría el mismo nivel de rendimiento relativo.</div>
+        </li>
+        <li>
+          <div class="step-num">5</div>
+          <div class="step-text"><strong>Coste energético a crol:</strong> se calcula la velocidad de esa marca equivalente y se aplica la ecuación de Capelli para crol → coste_crol en kJ/m.</div>
+        </li>
+        <li>
+          <div class="step-num">6</div>
+          <div class="step-text"><strong>Diferencia relativa de coste:</strong> diferencia_% = (coste_estilo / coste_crol − 1) × 100. Refleja cuánto más costoso energéticamente es el estilo frente al crol equivalente en términos de rendimiento.</div>
+        </li>
+        <li>
+          <div class="step-num">7</div>
+          <div class="step-text"><strong>Ajuste del tiempo a crol:</strong> t_crol_ajustado = t_crol × (1 + diferencia_% / 100). Si la braza supone un 12% más de gasto energético que el crol equivalente, se "alarga" el esfuerzo a crol un 12% para igualar la carga metabólica total.</div>
+        </li>
+        <li>
+          <div class="step-num">8</div>
+          <div class="step-text"><strong>Contribución energética final:</strong> se aplican las ecuaciones de Rodríguez &amp; Mader con ese tiempo ajustado, obteniendo el perfil energético estimado para la prueba y estilo originales.</div>
+        </li>
+      </ol>
     </section>
 
-    <!-- ── LIMITACIONES Y CONCLUSIONES ── -->
-    <!-- ── CALCULADORAS ── -->
+    <!-- ── APLICACIONES ── -->
+    <section id="aplicaciones" class="section">
+      <h2 class="section-title">Aplicaciones Prácticas</h2>
+      <p>Tener una estimación más precisa del perfil energético de una prueba —aunque sea teórica— abre la puerta a decisiones de entrenamiento más informadas. Estas son las aplicaciones más directas del modelo:</p>
+
+      <div class="app-grid">
+
+        <div class="app-card">
+          <span class="app-card-tag tag-plan">Planificación</span>
+          <h4>Periodización del entrenamiento</h4>
+          <p>Los modelos genéricos asignan los contenidos de cada bloque en función de la distancia. Si la marca de un nadador se aleja del rango de élite, esos contenidos dejan de ser adecuados. El modelo permite ajustar el peso de cada sistema energético en la periodización al perfil real del deportista.</p>
+          <div class="detail-box">
+            <strong>Ejemplo:</strong> Un nadador que hace los 100 m braza en 1:15 tiene un perfil glucolítico aproximadamente un 20% menor y un perfil aeróbico un 15% mayor que el estándar de 100 m. La potencia aeróbica debe tener más protagonismo en sus bloques específicos, y la capacidad láctica menos peso en la fase competitiva.
+          </div>
+        </div>
+
+        <div class="app-card">
+          <span class="app-card-tag tag-comb">Estilos combinados</span>
+          <h4>Pruebas de estilos individuales (IM)</h4>
+          <p>En los 200 y 400 estilos el nadador realiza cuatro segmentos con estilos distintos. El modelo puede estimar la demanda energética de cada tramo por separado y sumarlas para obtener el perfil global de la prueba —algo imposible con los modelos actuales que solo contemplan crol.</p>
+          <div class="detail-box">
+            <strong>Ejemplo:</strong> El segmento de braza en el 200 estilos es habitualmente el más costoso energéticamente y el de mayor impacto sobre el resultado final (González-Ravé et al., 2023). Cuantificar exactamente cuánto pesa cada tramo permite priorizar los sistemas a entrenar y distribuir mejor la carga a lo largo de la temporada.
+          </div>
+        </div>
+
+        <div class="app-card">
+          <span class="app-card-tag tag-eval">Evaluación</span>
+          <h4>Selección de pruebas fisiológicas</h4>
+          <p>El perfil energético estimado indica qué sistema es dominante en una prueba concreta, lo que determina qué evaluaciones son más relevantes para ese deportista y evita aplicar baterías de tests genéricas sin criterio.</p>
+          <div class="detail-box">
+            <strong>Aeróbico dominante →</strong> VO₂máx, umbral ventilatorio, test de nado continuo.<br>
+            <strong>Glucolítico dominante →</strong> tolerancia al lactato, sprints repetidos, capacidad anaeróbica.<br>
+            <strong>ATP-PCr dominante →</strong> potencia explosiva, tiempo de reacción en salida, sprints máximos cortos.
+          </div>
+        </div>
+
+        <div class="app-card">
+          <span class="app-card-tag tag-nutr">Nutrición</span>
+          <h4>Estrategia nutricional por sesión</h4>
+          <p>Las demandas metabólicas de cada sesión determinan qué sustratos son prioritarios. Conocer el perfil energético permite ajustar la alimentación pre y post sesión con mayor precisión, especialmente en atletas con dobles sesiones diarias donde el acoplamiento fisiología-nutrición marca la calidad del entrenamiento.</p>
+          <div class="detail-box">
+            <strong>Glucolítico dominante →</strong> optimizar reservas de glucógeno; carbohidratos antes y reposición en recuperación.<br>
+            <strong>Aeróbico dominante →</strong> disponibilidad estable de lípidos; estrategias de eficiencia en oxidación de grasas.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <section id="calculadoras" class="calc-section">
       <h2 class="section-title">Calculadoras</h2>
 
@@ -1156,21 +1357,24 @@
 
     </section>
     <!-- /CALCULADORAS -->
+
+    <!-- ── LIMITACIONES Y CONCLUSIONES ── -->
+    <section id="limitaciones" class="section">
       <h2 class="section-title">Limitaciones y Conclusiones</h2>
 
-      <p>Todo esto está cogido con muchas pinzas. Se basa en una serie de axiomas y asunciones que no tienen por qué ser válidos:</p>
+      <p>Todo esto está cogido con muchas pinzas. El modelo se sostiene sobre una serie de suposiciones que no tienen por qué ser válidas en todos los casos:</p>
 
       <ul class="limit-list">
-        <li>El modelo computerizado de Rodríguez y Mader representa correctamente la interacción de los sistemas energéticos a lo largo del tiempo en natación.</li>
-        <li>Las ecuaciones de Capelli son por lo general correctas para la mayoría de deportistas. La biomecánica, antropometría y otros muchos factores pueden alterar el coste energético del nado de un deportista concreto.</li>
-        <li>Los Swimming Points sirven para equiparar rendimiento. No lo son: solo tienen en cuenta los récords del mundo, y asumen que los récords de todos los eventos representan el mismo nivel de dificultad. El 200 libres de Biedermann en 2009 (1:42.00) aún sigue vigente, mientras que el récord del mundo de 200 braza masculino de la misma época ha sido batido 48 veces desde entonces.</li>
-        <li>La contribución de los sistemas energéticos a intensidades similares es la misma en mujeres que en hombres.</li>
+        <li>El modelo computacional de Rodríguez y Mader representa correctamente la interacción de los sistemas energéticos a lo largo del tiempo en natación. Es coherente y está validado parcialmente, pero no puede asegurarse que refleje con exactitud la realidad fisiológica en todos los perfiles de nadador.</li>
+        <li>Las ecuaciones de Capelli son por lo general correctas para la mayoría de deportistas. Pero la biomecánica, la antropometría y la técnica individual pueden alterar el coste energético real de un nadador concreto de forma significativa.</li>
+        <li>Los Swimming Points sirven para equiparar rendimiento entre estilos. Esto es discutible: solo dependen del récord del mundo, y asumen que todos los récords representan el mismo nivel de dificultad relativa. El 200 libres de Biedermann (1:42.00, 2009) sigue vigente; el récord de 200 braza de esa misma época ha sido batido decenas de veces desde entonces.</li>
+        <li>La contribución de los sistemas energéticos a intensidades similares es la misma en mujeres que en hombres. Sabemos que la oxidación de lípidos se ve más favorecida en mujeres, pero no existe suficiente evidencia específica en natación para modelar esa diferencia.</li>
       </ul>
 
       <div class="conclusion-card">
-        <p>Pese a que creo que este es un asunto que damos por básico —contenido aprendido—, en mi opinión estamos lejos de caracterizar correctamente y con consenso los distintos esfuerzos a los que el global de los nadadores se enfrenta. No podremos hacerlo hasta que podamos medirlo de forma individual, pero pienso que no deberíamos conformarnos con el cuerpo de conocimiento en este área en su estado actual.</p>
-        <p>Este ha sido mi humilde método para tratar de acercarme un poco más a lo que creo que debe ser la verdad. He intentado tener en cuenta los factores más básicos que creo que pueden influir, pero hay muchos obstáculos y pocas certezas. Pese a todo, creo que es posible que los cálculos efectuados estén más cerca de la verdad que simplemente coger el valor correspondiente de alguna distancia de crol y darlo por bueno.</p>
-        <p>Si has llegado hasta aquí, y has hecho el esfuerzo de intentar comprender y razonar conmigo, te estoy muy agradecido. Estaré encantado de saber tu opinión.</p>
+        <p>Pese a que tendemos a dar este asunto por aprendido, en mi opinión estamos lejos de caracterizar correctamente y con consenso los distintos esfuerzos a los que el conjunto de los nadadores se enfrenta. No podremos hacerlo hasta que podamos medirlo de forma individual, pero no deberíamos conformarnos con el estado actual del conocimiento en este área.</p>
+        <p>Este ha sido mi método para tratar de acercarme un poco más a lo que creo que debe ser la verdad. He intentado tener en cuenta los factores más básicos que pueden influir, pero hay muchos obstáculos y pocas certezas. Pese a todo, creo que los cálculos que aquí se plantean están más cerca de la realidad que simplemente tomar el valor correspondiente de una tabla de crol y darlo por válido para cualquier nadador.</p>
+        <p>Si has llegado hasta aquí y has hecho el esfuerzo de intentar comprender y razonar conmigo, te estoy muy agradecido. Estaré encantado de saber tu opinión.</p>
         <p class="signature">— David Primo Cubel</p>
       </div>
     </section>
