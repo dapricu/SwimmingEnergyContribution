@@ -1226,29 +1226,29 @@
       }
     }
 
-    // ─── Algoritmo completo 8 pasos ───
+    // ─── Algoritmo completo 8 pasos (fiel al modelo Python del TFG) ───
     function calcCompleto(distancia, tiempo, estilo, wrPrueba, wrCrol) {
-      // 1. Velocidad y coste del estilo elegido
-      const v       = distancia / tiempo;
-      const gasto   = calcCapelli(v, estilo);
+      // Paso 2: coste energético del estilo — redondeado a 2dp como en Python
+      const v     = distancia / tiempo;
+      const gasto = +calcCapelli(v, estilo).toFixed(2);
 
-      // 2. Swimming Points del tiempo dado
-      const sp1     = 1000 * Math.pow(wrPrueba / tiempo, 3);
+      // Paso 3: Swimming Points — redondeado a entero como en Python
+      const sp1 = Math.round(1000 * Math.pow(wrPrueba / tiempo, 3));
 
-      // 3. Tiempo crol equivalente en SP (solución directa)
+      // Paso 4: tiempo crol equivalente en SP (solución directa de la ecuación)
       let tiempoCrol = wrCrol * Math.pow(1000 / sp1, 1 / 3);
 
-      // 4. Coste crol a ese tiempo equivalente
-      const vCrol   = distancia / tiempoCrol;
-      const gastoCrol = calcCapelli(vCrol, 'crol');
+      // Paso 5: coste crol — redondeado a 2dp como en Python
+      const vCrol    = distancia / tiempoCrol;
+      const gastoCrol = +calcCapelli(vCrol, 'crol').toFixed(2);
 
-      // 5. Ajuste del tiempo crol:
-      //    Un estilo más caro/metro que crol exige mayor velocidad en crol
-      //    para igualar el coste energético → tiempo menor.
-      //    Se escala proporcionalmente y se limita al récord mundial crol.
-      tiempoCrol = Math.max(wrCrol, tiempoCrol * (gastoCrol / gasto));
+      // Paso 6: % de diferencia — redondeado a 2dp como en Python
+      const diferencia = +((gasto * 100 / gastoCrol) - 100).toFixed(2);
 
-      // 6. Contribución energética para el tiempo crol ajustado
+      // Paso 7: aumentar la marca de crol en ese %
+      tiempoCrol = tiempoCrol + tiempoCrol * (diferencia / 100);
+
+      // Paso 8: contribución energética para el tiempo crol ajustado
       return { ...calcRoMa(tiempoCrol), tiempoCrolAdj: +tiempoCrol.toFixed(2) };
     }
 
