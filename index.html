@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistemas Energéticos en Natación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── Reset & variables ─── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* ── Paleta azul marino / aqua ── */
+      --color-primary:     #023e8a;
+      --color-primary-mid: #0077b6;
+      --color-secondary:   #0096c7;
+      --color-accent:      #48cae4;
+      --color-accent-lt:   #caf0f8;
+      --color-bg:          #f0f8ff;
+      --color-surface:     #ffffff;
+      --color-text:        #03045e;
+      --color-text-muted:  #5c677d;
+      --color-border:      #d0eaf8;
+      /* ── Sistemas energéticos ── */
+      --color-pcr:         #e63946;
+      --color-glu:         #f4a261;
+      --color-oxi:         #2a9d8f;
+      /* ── Layout ── */
+      --nav-height:  64px;
+      --max-width:   1100px;
+      --radius:      8px;
+      --radius-lg:   14px;
+      --shadow-sm:   0 1px 4px rgba(2, 62, 138, 0.08);
+      --shadow:      0 3px 14px rgba(2, 62, 138, 0.13);
+      --shadow-lg:   0 8px 28px rgba(2, 62, 138, 0.18);
+      --transition:  0.25s ease;
+      --font:        'Inter', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--nav-height) + 1rem);
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.7;
+      font-size: 1rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Navigation ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-primary-mid) 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 20px rgba(2, 62, 138, 0.28);
+    }
+
+    nav .nav-brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      transition: opacity var(--transition);
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* ─── Tipografía ─── */
+    h1, h2, h3, h4 {
+      font-family: var(--font);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; }
+    h3 { font-size: 1.1rem; font-weight: 600; }
+
+    p {
+      font-size: 0.97rem;
+      line-height: 1.75;
+      color: var(--color-text-muted);
+    }
+
+    strong { color: var(--color-text); font-weight: 600; }
+
+    em { color: var(--color-primary-mid); }
+
+    /* ─── Main content ─── */
+    main#content {
+      margin-top: var(--nav-height);
+      min-height: calc(100vh - var(--nav-height) - 60px);
+      max-width: var(--max-width);
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ─── Footer ─── */
+    footer {
+      background-color: var(--color-primary);
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      padding: 1rem 2rem;
+      font-size: 0.85rem;
+    }
+
+    footer p { color: rgba(255, 255, 255, 0.8); }
+
+    footer a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Utilities (disponibles para secciones futuras) ─── */
+    .card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.6rem;
+      color: var(--color-primary);
+      margin-bottom: 1rem;
+      border-bottom: 3px solid var(--color-secondary);
+      padding-bottom: 0.4rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background-color var(--transition), transform var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--color-primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--color-secondary);
+      transform: translateY(-1px);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 3.5rem 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.93);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section p {
+      margin-bottom: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section strong {
+      color: var(--color-text);
+    }
+
+    /* ─── Energy system cards ─── */
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .system-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.4rem 1.6rem;
+      border-top: 4px solid var(--color-secondary);
+    }
+
+    .system-card.anaerobic { border-top-color: #ef233c; }
+    .system-card.glycolytic { border-top-color: #f77f00; }
+    .system-card.oxidative { border-top-color: #2d6a4f; }
+
+    .system-card h3 {
+      font-size: 1.05rem;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .system-card .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-anaerobic { background: #fde8ea; color: #c1121f; }
+    .badge-aerobic   { background: #d8f3dc; color: #1b4332; }
+
+    .system-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* ─── Tables ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--color-border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-surface);
+      font-size: 0.9rem;
+      font-family: var(--font);
+    }
+
+    thead tr {
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    }
+
+    thead th {
+      color: #fff;
+      padding: 0.85rem 1.1rem;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      border-bottom: 2px solid rgba(255,255,255,0.15);
+    }
+
+    thead th:first-child { border-radius: var(--radius-lg) 0 0 0; }
+    thead th:last-child  { border-radius: 0 var(--radius-lg) 0 0; }
+
+    tbody tr {
+      transition: background 0.15s ease;
+    }
+
+    tbody tr:nth-child(even) { background: #f4fbff; }
+    tbody tr:hover { background: var(--color-accent-lt); }
+
+    tbody td {
+      padding: 0.7rem 1.1rem;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.91rem;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--color-text);
+      border-left: 3px solid transparent;
+    }
+
+    tbody tr:hover td:first-child {
+      border-left-color: var(--color-accent);
+    }
+
+    /* ─── Controversy highlight ─── */
+    .controversy-box {
+      background: #fff8e1;
+      border-left: 4px solid #f4a261;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .controversy-box p { color: #5c4a1e; margin-bottom: 0.5rem; }
+    .controversy-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Numbered problem list ─── */
+    .problem-list {
+      list-style: none;
+      margin: 1.2rem 0;
+    }
+
+    .problem-list li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.2rem;
+    }
+
+    .problem-list .num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .problem-list .text { font-size: 0.9rem; color: var(--color-text-muted); }
+    .problem-list .text strong { color: var(--color-text); }
+
+    /* ─── Solution box ─── */
+    .solution-box {
+      background: #e8f5e9;
+      border-left: 4px solid #2d6a4f;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #1b4332;
+    }
+
+    /* ─── Limitations list ─── */
+    .limit-list {
+      list-style: none;
+      margin: 1.2rem 0;
+      counter-reset: limit-counter;
+    }
+
+    .limit-list li {
+      counter-increment: limit-counter;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+    }
+
+    .limit-list li::before {
+      content: counter(limit-counter);
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: #ef233c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    /* ─── Conclusion card ─── */
+    .conclusion-card {
+      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .conclusion-card p { color: rgba(255, 255, 255, 0.93); margin-bottom: 0.8rem; }
+    .conclusion-card p:last-child { margin-bottom: 0; }
+    .conclusion-card .signature {
+      margin-top: 1.2rem;
+      font-weight: 700;
+      font-style: italic;
+      opacity: 1;
+    }
+
+    /* ─── Calculadoras ─── */
+    .calc-section {
+      margin-bottom: 3rem;
+    }
+
+    .calc-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: 1.8rem 2rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--color-border);
+      border-top: 4px solid var(--color-primary-mid);
+      transition: box-shadow var(--transition);
+    }
+
+    .calc-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    #calc-basica   { border-top-color: var(--color-pcr); }
+    #calc-capelli  { border-top-color: var(--color-primary-mid); }
+    #calc-completa { border-top-color: var(--color-oxi); }
+
+    .calc-card h3 {
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .calc-card .calc-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.55rem 0.8rem;
+      border: 1.5px solid #cce4f0;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      background: #f8fcff;
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--color-secondary);
+      background: #fff;
+    }
+
+    .calc-btn {
+      padding: 0.6rem 1.6rem;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .calc-btn:hover {
+      background: var(--color-secondary);
+      transform: translateY(-1px);
+    }
+
+    .calc-results {
+      margin-top: 1.4rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e2eef7;
+      display: none;
+    }
+
+    .calc-results.visible { display: block; }
+
+    .calc-results .results-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .result-item {
+      margin-bottom: 0.9rem;
+    }
+
+    .result-item:last-of-type { margin-bottom: 0; }
+
+    .result-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25rem;
+    }
+
+    .result-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .result-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .result-bar-track {
+      height: 13px;
+      background: var(--color-accent-lt);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      width: 0%;
+      transition: width 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .bar-pcr  { background: linear-gradient(90deg, var(--color-pcr), #ff6b81); }
+    .bar-glu  { background: linear-gradient(90deg, var(--color-glu), #ffd166); }
+    .bar-oxi  { background: linear-gradient(90deg, var(--color-oxi), #52b788); }
+    .bar-cost { background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); }
+
+    /* Colores de valor por sistema (calc 1 y calc 3) */
+    #c1-results .result-item:nth-of-type(1) .result-value,
+    #c3-results .result-item:nth-of-type(1) .result-value { color: var(--color-pcr); }
+
+    #c1-results .result-item:nth-of-type(2) .result-value,
+    #c3-results .result-item:nth-of-type(2) .result-value { color: var(--color-glu); }
+
+    #c1-results .result-item:nth-of-type(3) .result-value,
+    #c3-results .result-item:nth-of-type(3) .result-value { color: var(--color-oxi); }
+
+    .result-note {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .calc-error {
+      color: #c1121f;
+      font-size: 0.88rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .calc-error.visible { display: block; }
+
+    /* ─── Bibliografía flotante ─── */
+    .fab {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      z-index: 990;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .fab:hover { transform: scale(1.1); background: var(--color-secondary); }
+    .fab:active { transform: scale(0.96); }
+
+    .bib-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 62, 138, 0.35);
+      backdrop-filter: blur(3px);
+      z-index: 1100;
+    }
+
+    .bib-modal {
+      position: fixed;
+      bottom: 5.5rem;
+      right: 2rem;
+      width: min(480px, calc(100vw - 2.5rem));
+      max-height: min(72vh, 580px);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+      z-index: 1200;
+      padding: 1.4rem 1.6rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bib-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--color-accent-lt);
+    }
+
+    .bib-modal-header h3 {
+      color: var(--color-primary);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .bib-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--color-text-muted);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
+      line-height: 1;
+    }
+
+    .bib-close:hover { background: #f0f8ff; color: var(--color-text); }
+
+    .bib-list {
+      padding-left: 1.3rem;
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: var(--color-text-muted);
+      overflow-y: auto;
+      flex: 1;
+      padding-bottom: 1.2rem;
+      padding-right: 0.3rem;
+    }
+
+    .bib-list::-webkit-scrollbar { width: 5px; }
+    .bib-list::-webkit-scrollbar-track { background: #f0f8ff; border-radius: 99px; }
+    .bib-list::-webkit-scrollbar-thumb { background: var(--color-accent); border-radius: 99px; }
+
+    .bib-list li { margin-bottom: 0.7rem; }
+    .bib-list li:last-child { margin-bottom: 0; }
+    .bib-list em { font-style: italic; }
+    .bib-list a { color: var(--color-secondary); word-break: break-all; }
+
+    .bib-overlay[hidden],
+    .bib-modal[hidden] { display: none; }
+
+    /* ─── Fade-in al hacer scroll ─── */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Hover en tarjetas de sistema ─── */
+    .system-card {
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .system-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* ─── Botón activo ─── */
+    .calc-btn:active {
+      transform: scale(0.97) translateY(0);
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 0.7rem;
+      }
+
+      nav .nav-brand {
+        font-size: 0.9rem;
+        max-width: 160px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .hero {
+        padding: 2.5rem 1.5rem;
+      }
+
+      .calc-card {
+        padding: 1.4rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 540px) {
+      nav .nav-brand { display: none; }
+      nav { justify-content: center; }
+      nav ul { gap: 0.5rem; }
+      nav ul li a { font-size: 0.78rem; }
+    }
+
+    @media (max-width: 480px) {
+      main#content { padding: 1.2rem 0.9rem; }
+      .fab { bottom: 1.2rem; right: 1.2rem; width: 48px; height: 48px; }
+      .bib-modal { bottom: 4.5rem; right: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ Navigation ═══ -->
+  <nav>
+    <span class="nav-brand">Sistemas Energéticos en Natación</span>
+    <ul>
+      <li><a href="#sistemas">Sistemas</a></li>
+      <li><a href="#controversia">Controversia</a></li>
+      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#calculadoras">Calculadoras</a></li>
+      <li><a href="#limitaciones">Limitaciones</a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ Main content ═══ -->
+  <main id="content">
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <h1>Sistemas Energéticos en Natación</h1>
+      <p>El rendimiento en natación depende, principalmente, de la potencia metabólica que los deportistas son capaces de producir en competición y del coste energético que les supone nadar a máxima velocidad. Aquí abordamos el primero de esos factores: la producción de energía.</p>
+    </section>
+
+    <!-- ── SISTEMAS ENERGÉTICOS ── -->
+    <section id="sistemas" class="section">
+      <h2 class="section-title">¿Cómo obtenemos energía?</h2>
+      <p>Existe una molécula llamada <strong>Adenosín trifosfato (ATP)</strong> que contiene gran cantidad de energía y se almacena en las células. Cuando se rompe la libera, y esa es la principal fuente de energía de la mayoría de funciones del cuerpo, incluida la contracción muscular.</p>
+      <p>Hay tres caminos para obtenerla. Los dos primeros actúan sin utilizar oxígeno y forman el <strong>metabolismo anaeróbico</strong>; el tercero necesita oxígeno y comprende el <strong>metabolismo aeróbico</strong>. El cuerpo utiliza generalmente una combinación de los tres, a diferentes niveles, para alcanzar sus demandas energéticas.</p>
+
+      <div class="systems-grid">
+        <div class="system-card anaerobic">
+          <span class="badge badge-anaerobic">Anaeróbico</span>
+          <h3>ATP-PCr</h3>
+          <p>Utiliza directamente la pequeña reserva de ATP y fosfocreatina almacenadas en las células para producir energía <strong>muy</strong> rápido. El problema es que dura muy poco: a los <strong>12–15 segundos</strong> esas reservas están prácticamente esquilmadas.</p>
+        </div>
+        <div class="system-card glycolytic">
+          <span class="badge badge-anaerobic">Anaeróbico</span>
+          <h3>Sistema Glucolítico</h3>
+          <p>Rompe moléculas de glucosa. No produce grandes cantidades de energía, pero es <strong>rápido</strong> y dispone de más combustible que el ATP-PCr. Es el sistema predominante entre los <strong>15 segundos y los dos minutos</strong> de esfuerzo máximo. Este sistema es el que produce el famoso lactato.</p>
+        </div>
+        <div class="system-card oxidative">
+          <span class="badge badge-aerobic">Aeróbico</span>
+          <h3>Sistema Oxidativo</h3>
+          <p>El más complejo de los tres. Rompe sustratos (carbohidratos, grasas o proteínas) con ayuda del oxígeno. Dependiendo del sustrato produce más o menos energía, y durante más o menos tiempo. Es el sistema dominante en esfuerzos de duración media-larga.</p>
+        </div>
+      </div>
+
+      <p>Es importante recordar que <strong>todos están activos simultáneamente</strong>, solo que en diferentes grados de prioridad dependiendo del carácter del esfuerzo y del sustrato disponible.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Sistema Energético</th>
+              <th>¿Necesita oxígeno?</th>
+              <th>Potencia energética</th>
+              <th>Capacidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ATP-PCr</td>
+              <td>No</td>
+              <td>10</td>
+              <td>~15 s</td>
+            </tr>
+            <tr>
+              <td>Sistema Glucolítico</td>
+              <td>No</td>
+              <td>5</td>
+              <td>1–2 minutos</td>
+            </tr>
+            <tr>
+              <td>Sistema Oxidativo (carbos)</td>
+              <td>Sí</td>
+              <td>2,5</td>
+              <td>~90 minutos</td>
+            </tr>
+            <tr>
+              <td>Sistema Oxidativo (grasas)</td>
+              <td>Sí</td>
+              <td>1,5</td>
+              <td>Días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── CONTROVERSIA ── -->
+    <section id="controversia" class="section">
+      <h2 class="section-title">La Controversia</h2>
+      <p>El nadador debe obtener energía —mucha, cuanta más mejor— de los sistemas energéticos predominantes en su modalidad. Maglischo, Navarro y un sinfín de autores reconocidos han escrito al respecto. Esta es una tabla resumen de sus resultados:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Distancia</th>
+              <th>ATP-PCr (%)</th>
+              <th>S. Glucolítico (%)</th>
+              <th>S. Oxidativo (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50 m</td><td>15–80</td><td>2–80</td><td>2–26</td></tr>
+            <tr><td>100 m</td><td>5–28</td><td>15–65</td><td>5–54</td></tr>
+            <tr><td>200 m</td><td>2–30</td><td>25–65</td><td>5–65</td></tr>
+            <tr><td>400 m</td><td>0–20</td><td>10–55</td><td>25–83</td></tr>
+            <tr><td>800 m</td><td>0–5</td><td>25–30</td><td>65–83</td></tr>
+            <tr><td>1500 m</td><td>0–10</td><td>15–20</td><td>78–90</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="controversy-box">
+        <p><strong>¿Veis el problema?</strong> Yo creo que hay varios:</p>
+      </div>
+
+      <ul class="problem-list">
+        <li>
+          <div class="num">1</div>
+          <div class="text"><strong>No coinciden.</strong> El rango en el que se mueven es demasiado grande para resultar de utilidad. ¿Es el 200 libres una prueba eminentemente anaeróbica, o por el contrario prima el metabolismo aeróbico? Resulta imposible dar una respuesta particular; diferentes deportistas pueden llegar al mismo destino de formas distintas, ¿pero cómo es en general la prueba?</div>
+        </li>
+        <li>
+          <div class="num">2</div>
+          <div class="text"><strong>Usan distancias</strong> en vez de tiempo. Esto puede ser práctico en rasgos generales, pero no es preciso en casos concretos. La contribución del sistema ATP-PCr no es la misma para un 100 libres en 46 segundos que para uno en 1 minuto y 10 segundos, aunque sea la misma distancia y estilo.</div>
+        </li>
+        <li>
+          <div class="num">3</div>
+          <div class="text"><strong>Hablan exclusivamente de nado crol y en hombres.</strong> Sabemos que en mujeres la oxidación de lípidos se ve más favorecida frente a la de carbohidratos que en hombres, pero es una incógnita cómo se comportan respecto a los otros sistemas en natación.</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── SOLUCIONES ── -->
+    <section id="soluciones" class="section">
+      <h2 class="section-title">Soluciones</h2>
+
+      <h3 style="color:var(--color-primary);margin-bottom:.6rem;">Problema 1: discrepancias entre autores</h3>
+      <p>La primera solución que se me ocurrió fue hacer una media, pero este enfoque podría llevar a una falacia: sin certeza de que todos los estudios tengan el mismo grado de validez, la media podría ser tan acertada como elegir un valor al azar en el rango correspondiente.</p>
+      <p>La alternativa: <strong>tener un favorito</strong>. En la literatura científica, y en especial en España y en el mundo de la natación, Fernando Navarro siempre es el primero en salir. Pero para este supuesto me inclino por <strong>Rodríguez y Mader</strong>. En su artículo <em>Energy systems in swimming</em> presentan una simulación computacional de la participación de los sistemas energéticos en nadadores de élite masculinos. Lo que me parece muy importante —y es un punto a su favor— es que <strong>incluyen marcas de tiempo</strong>:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Distancia</th>
+              <th>Duración (min:s)</th>
+              <th>ATP-PCr (%)</th>
+              <th>S. Glucolítico (%)</th>
+              <th>S. Oxidativo (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50 m</td><td>0:22.0</td><td>38</td><td>58</td><td>4</td></tr>
+            <tr><td>100 m</td><td>0:48.0</td><td>20</td><td>39</td><td>41</td></tr>
+            <tr><td>200 m</td><td>1:45.0</td><td>13</td><td>29</td><td>58</td></tr>
+            <tr><td>400 m</td><td>3:45.0</td><td>6</td><td>21</td><td>73</td></tr>
+            <tr><td>800 m</td><td>7:50.0</td><td>4</td><td>14</td><td>82</td></tr>
+            <tr><td>1500 m</td><td>14:50.0</td><td>3</td><td>11</td><td>86</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="solution-box">
+        Esto <strong>soluciona por completo el Problema 1 y facilita mucho atajar el Problema 2</strong>: ahora disponemos de valores concretos ubicados en un tiempo también concreto.
+      </div>
+
+      <h3 style="color:var(--color-primary);margin:.1.5rem 0 .6rem;">Problema 2: esfuerzos de diferente duración</h3>
+      <p>Los datos de Rodríguez y Mader son para tiempos de élite masculinos en crol. Para una nadadora de 100 braza en 1:15, ese tiempo se aleja del modelo original. La solución: <strong>modelar una función continua</strong> a partir de los puntos de la tabla anterior. Con esa función podemos obtener el valor exacto para cualquier instante de esfuerzo.</p>
+      <p>Las ecuaciones resultantes (ajuste en MatLAB, R² ≥ 0,995), donde <em>x</em> es el tiempo total de la prueba en segundos, son:</p>
+
+      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+        <div><strong>ATP-PCr:</strong> 424,1 · x<sup>−0,789</sup> + 0,8296</div>
+        <div><strong>Sistema Glucolítico:</strong> 239,7 · x<sup>−0,4676</sup> + 1,072</div>
+        <div><strong>Sistema Oxidativo:</strong> −585,6 · x<sup>−0,6017</sup> + 95,78</div>
+      </div>
+
+      <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Problema 3: diferentes estilos</h3>
+      <p>¿Requiere la misma cantidad de energía nadar 75 segundos a crol que a braza? La respuesta es no. Gracias a <strong>Capelli y colaboradores</strong> sabemos que el coste energético varía significativamente entre estilos. Sus ecuaciones (donde <em>x</em> es la velocidad en m/s):</p>
+
+      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+        <div><strong>Mariposa:</strong> 0,234 · 10<sup>0,547x</sup></div>
+        <div><strong>Espalda:</strong> 0,270 · 10<sup>0,491x</sup></div>
+        <div><strong>Braza:</strong> 0,548 · 10<sup>0,355x</sup></div>
+        <div><strong>Crol:</strong> 0,228 · 10<sup>0,488x</sup></div>
+      </div>
+
+      <p style="margin-top:1rem;">Con esto, el algoritmo completo compara el coste energético entre estilos usando <strong>Swimming Points</strong> como proxy de intensidad relativa, y ajusta el tiempo equivalente a crol antes de aplicar las ecuaciones de Rodríguez y Mader.</p>
+    </section>
+
+    <!-- ── LIMITACIONES Y CONCLUSIONES ── -->
+    <!-- ── CALCULADORAS ── -->
+    <section id="calculadoras" class="calc-section">
+      <h2 class="section-title">Calculadoras</h2>
+
+      <!-- Calc 1: Sistemas energéticos crol -->
+      <div class="calc-card" id="calc-basica">
+        <h3>Contribución por tiempo (crol, Rodríguez &amp; Mader)</h3>
+        <p class="calc-desc">Introduce el tiempo de la prueba en segundos y obtén la contribución estimada de cada sistema energético según el modelo de Rodríguez &amp; Mader.</p>
+        <div class="form-grid" style="grid-template-columns: 200px 1fr;">
+          <div class="form-group">
+            <label for="c1-tiempo">Tiempo (s)</label>
+            <input type="number" id="c1-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 48">
+          </div>
+        </div>
+        <button class="calc-btn" id="c1-btn">Calcular</button>
+        <p class="calc-error" id="c1-error">Introduce un tiempo válido (entre 10 y 1800 s).</p>
+        <div class="calc-results" id="c1-results">
+          <p class="results-title">Contribución estimada</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">ATP-PCr</span>
+              <span class="result-value" id="c1-pcr-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-pcr" id="c1-pcr-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Glucolítico</span>
+              <span class="result-value" id="c1-glu-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-glu" id="c1-glu-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Oxidativo</span>
+              <span class="result-value" id="c1-oxi-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c1-oxi-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note">Modelo válido para crol masculino de élite. Los valores son porcentajes de contribución energética.</p>
+        </div>
+      </div>
+      <!-- /Calc 1 -->
+
+      <!-- Calc 2: Coste energético Capelli -->
+      <div class="calc-card" id="calc-capelli">
+        <h3>Coste energético por estilo (Capelli)</h3>
+        <p class="calc-desc">Obtén el coste energético de nado en KJ/m para cualquier estilo y velocidad, y compáralo con crol.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="c2-dist">Distancia (m)</label>
+            <input type="number" id="c2-dist" min="25" max="1500" step="25" placeholder="ej. 100">
+          </div>
+          <div class="form-group">
+            <label for="c2-tiempo">Tiempo (s)</label>
+            <input type="number" id="c2-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 75">
+          </div>
+          <div class="form-group">
+            <label for="c2-estilo">Estilo</label>
+            <select id="c2-estilo">
+              <option value="mariposa">Mariposa</option>
+              <option value="espalda">Espalda</option>
+              <option value="braza">Braza</option>
+              <option value="crol" selected>Crol</option>
+            </select>
+          </div>
+        </div>
+        <button class="calc-btn" id="c2-btn">Calcular</button>
+        <p class="calc-error" id="c2-error">Introduce valores válidos de distancia y tiempo.</p>
+        <div class="calc-results" id="c2-results">
+          <p class="results-title">Coste energético</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name" id="c2-estilo-label">—</span>
+              <span class="result-value" id="c2-cost-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-cost" id="c2-cost-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item" id="c2-crol-row">
+            <div class="result-label">
+              <span class="result-name">Crol (misma velocidad)</span>
+              <span class="result-value" id="c2-crol-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c2-crol-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note" id="c2-diff-note"></p>
+        </div>
+      </div>
+      <!-- /Calc 2 -->
+
+      <!-- Calc 3: Algoritmo completo -->
+      <div class="calc-card" id="calc-completa">
+        <h3>Contribución ajustada al estilo (algoritmo completo)</h3>
+        <p class="calc-desc">Combina el modelo de Rodríguez &amp; Mader con el coste de Capelli y Swimming Points para estimar la contribución energética en cualquier estilo. Necesita los récords del mundo de la prueba y del mismo recorrido a crol.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="c3-dist">Distancia (m)</label>
+            <input type="number" id="c3-dist" min="25" max="1500" step="25" placeholder="ej. 100">
+          </div>
+          <div class="form-group">
+            <label for="c3-tiempo">Tu tiempo (s)</label>
+            <input type="number" id="c3-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 75">
+          </div>
+          <div class="form-group">
+            <label for="c3-estilo">Estilo</label>
+            <select id="c3-estilo">
+              <option value="mariposa">Mariposa</option>
+              <option value="espalda">Espalda</option>
+              <option value="braza" selected>Braza</option>
+              <option value="crol">Crol</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c3-wr-prueba">RM prueba (s)</label>
+            <input type="number" id="c3-wr-prueba" min="10" max="1800" step="0.01" placeholder="ej. 64.13">
+          </div>
+          <div class="form-group">
+            <label for="c3-wr-crol">RM crol misma dist. (s)</label>
+            <input type="number" id="c3-wr-crol" min="10" max="1800" step="0.01" placeholder="ej. 51.71">
+          </div>
+        </div>
+        <button class="calc-btn" id="c3-btn">Calcular</button>
+        <p class="calc-error" id="c3-error">Introduce todos los valores correctamente.</p>
+        <div class="calc-results" id="c3-results">
+          <p class="results-title">Contribución estimada (ajustada al estilo)</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">ATP-PCr</span>
+              <span class="result-value" id="c3-pcr-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-pcr" id="c3-pcr-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Glucolítico</span>
+              <span class="result-value" id="c3-glu-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-glu" id="c3-glu-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Oxidativo</span>
+              <span class="result-value" id="c3-oxi-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c3-oxi-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note" id="c3-equiv-note"></p>
+        </div>
+      </div>
+      <!-- /Calc 3 -->
+
+    </section>
+    <!-- /CALCULADORAS -->
+      <h2 class="section-title">Limitaciones y Conclusiones</h2>
+
+      <p>Todo esto está cogido con muchas pinzas. Se basa en una serie de axiomas y asunciones que no tienen por qué ser válidos:</p>
+
+      <ul class="limit-list">
+        <li>El modelo computerizado de Rodríguez y Mader representa correctamente la interacción de los sistemas energéticos a lo largo del tiempo en natación.</li>
+        <li>Las ecuaciones de Capelli son por lo general correctas para la mayoría de deportistas. La biomecánica, antropometría y otros muchos factores pueden alterar el coste energético del nado de un deportista concreto.</li>
+        <li>Los Swimming Points sirven para equiparar rendimiento. No lo son: solo tienen en cuenta los récords del mundo, y asumen que los récords de todos los eventos representan el mismo nivel de dificultad. El 200 libres de Biedermann en 2009 (1:42.00) aún sigue vigente, mientras que el récord del mundo de 200 braza masculino de la misma época ha sido batido 48 veces desde entonces.</li>
+        <li>La contribución de los sistemas energéticos a intensidades similares es la misma en mujeres que en hombres.</li>
+      </ul>
+
+      <div class="conclusion-card">
+        <p>Pese a que creo que este es un asunto que damos por básico —contenido aprendido—, en mi opinión estamos lejos de caracterizar correctamente y con consenso los distintos esfuerzos a los que el global de los nadadores se enfrenta. No podremos hacerlo hasta que podamos medirlo de forma individual, pero pienso que no deberíamos conformarnos con el cuerpo de conocimiento en este área en su estado actual.</p>
+        <p>Este ha sido mi humilde método para tratar de acercarme un poco más a lo que creo que debe ser la verdad. He intentado tener en cuenta los factores más básicos que creo que pueden influir, pero hay muchos obstáculos y pocas certezas. Pese a todo, creo que es posible que los cálculos efectuados estén más cerca de la verdad que simplemente coger el valor correspondiente de alguna distancia de crol y darlo por bueno.</p>
+        <p>Si has llegado hasta aquí, y has hecho el esfuerzo de intentar comprender y razonar conmigo, te estoy muy agradecido. Estaré encantado de saber tu opinión.</p>
+        <p class="signature">— David Primo Cubel</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ═══ Bibliografía flotante ═══ -->
+  <button id="bib-btn" class="fab" aria-label="Bibliografía" title="Ver bibliografía">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+  </button>
+
+  <div id="bib-overlay" class="bib-overlay" hidden></div>
+
+  <aside id="bib-modal" class="bib-modal" role="dialog" aria-modal="true" aria-label="Bibliografía" hidden>
+    <div class="bib-modal-header">
+      <h3>Bibliografía</h3>
+      <button id="bib-close" class="bib-close" aria-label="Cerrar">✕</button>
+    </div>
+    <ol class="bib-list">
+      <li>Alexiou, S. (2014). The effect of water temperature on the human body and the swimming effort. <a href="https://doi.org/10.4127/jbe.2014.0075" target="_blank" rel="noopener">doi:10.4127/jbe.2014.0075</a></li>
+      <li>Bompa, T. O., &amp; Buzzichelli, C. (2019). <em>Periodization: Theory and methodology of training</em> (6th ed.). Human Kinetics.</li>
+      <li>Capelli, C., Pendergast, D., &amp; Termin, B. (1998). Energetics of swimming at maximal speeds in humans. <em>European Journal of Applied Physiology and Occupational Physiology</em>, 78, 385–393. <a href="https://doi.org/10.1007/s004210050435" target="_blank" rel="noopener">doi:10.1007/s004210050435</a></li>
+      <li>Cuartero, M., del Castillo, J. A., Torrallardona, X., &amp; Murio, J. (2010). <em>Entrenamiento de las especialidades de natación</em>. Real Federación Española de Natación.</li>
+      <li>Gay, A., Abraldes, J. A., Zacca, R., Morales, E., López-Contreras, G., Fernandes, R. J., &amp; Arellano, R. (2018). Acute effects of water temperature in swimming performance: A biophysical analysis. <em>XIIIth International Symposium on Biomechanics and Medicine in Swimming Proceedings</em>, 250–254.</li>
+      <li>Gomes, D. T., &amp; Henriques-Rodrigues, L. (2019). Swimming performance index based on extreme value theory. <em>International Journal of Sports Science &amp; Coaching</em>, 14(1), 51–62. <a href="https://doi.org/10.1177/1747954118808068" target="_blank" rel="noopener">doi:10.1177/1747954118808068</a></li>
+      <li>González-Ravé, J. M., Santos-Cerro, J., González-Megía, P., &amp; Pyne, D. (2023). Contributions of each of the four swimming strokes to elite 200-400 individual medley swimming performance in short and long course competitions. <em>PeerJ</em>, 11, e16612. <a href="https://doi.org/10.7717/peerj.16612" target="_blank" rel="noopener">doi:10.7717/peerj.16612</a></li>
+      <li>Hackney, A. C. (2017). <em>Sex hormones, exercise and women: Scientific and clinical aspects</em>. Springer.</li>
+      <li>Hamouche, K. (2019). <em>The biology of swimming</em>. SwimSmart.</li>
+      <li>Joyce, D., &amp; Lewindon, D. (2023). <em>Entrenamiento de alto rendimiento aplicado a los deportes</em>. Human Kinetics.</li>
+      <li>Kenney, W. L., Wilmore, J. H., &amp; Costill, D. L. (2022). <em>Physiology of sport and exercise</em> (8th ed.). Human Kinetics.</li>
+      <li>Laursen, P., &amp; Buchheit, M. (2019). <em>Science and Application of High-Intensity Interval Training</em> (1st ed.). Human Kinetics.</li>
+      <li>López Chicharro, J., Vicente Campos, D., &amp; Cancino López, J. (2013). <em>Fisiología del Entrenamiento Aeróbico: Una Visión Integrada</em> (1st ed.). Editorial Médica Panamericana.</li>
+      <li>Mitchell, L. (2019). <em>Anaerobic assessment and training monitoring in elite swimmers</em>. University of Canberra.</li>
+      <li>National Strength and Conditioning Association. (2012a). <em>NSCA's guide to program design</em> (Vol. 4). Human Kinetics.</li>
+      <li>National Strength and Conditioning Association. (2012b). <em>NSCA's guide to tests and assessments</em>. Human Kinetics.</li>
+      <li>Navarro, F., Oca, A., &amp; Rivas, A. (2010). <em>Planificación del entrenamiento y su control</em>. Real Federación Española de Natación.</li>
+      <li>Okasha, S. (2016). <em>Philosophy of Science: A Very Short Introduction</em>. Oxford University Press.</li>
+      <li>Pi, A., Villivalam, S. D., &amp; Kang, S. (2023). The molecular mechanisms of fuel utilization during exercise. <em>Biology</em>, 12(11). <a href="https://doi.org/10.3390/biology12111450" target="_blank" rel="noopener">doi:10.3390/biology12111450</a></li>
+      <li>Pyne, D., &amp; Sharp, R. (2014). Physical and energy requirements of competitive swimming events. <em>International Journal of Sport Nutrition and Exercise Metabolism</em>, 24. <a href="https://doi.org/10.1123/ijsnem.2014-0047" target="_blank" rel="noopener">doi:10.1123/ijsnem.2014-0047</a></li>
+      <li>Rodríguez, F., &amp; Mader, A. (2011). Energy systems in swimming. En <em>World book of swimming: From science to performance</em> (pp. 225–240). Nova Science Publishers. <a href="https://doi.org/10.13140/2.1.3260.5128" target="_blank" rel="noopener">doi:10.13140/2.1.3260.5128</a></li>
+      <li>Scroggs, K., &amp; Simonson, S. R. (2021). Writing a needs analysis: Exploring the details. <em>Strength &amp; Conditioning Journal</em>, 43(5), 87. <a href="https://doi.org/10.1519/SSC.0000000000000628" target="_blank" rel="noopener">doi:10.1519/SSC.0000000000000628</a></li>
+      <li>Toussaint, H. M., &amp; Hollander, A. P. (1994). Energetics of competitive swimming: Implications for training programmes. <em>Sports Medicine</em>, 18(6), 384–405. <a href="https://doi.org/10.2165/00007256-199418060-00004" target="_blank" rel="noopener">doi:10.2165/00007256-199418060-00004</a></li>
+      <li>Ungerechts, B., &amp; Arellano, R. (2009). Hydrodynamics in swimming. En <em>World book of swimming: From science to performance</em> (p. 450).</li>
+      <li>Weber, S. (2023). Metabolic profiling in swimming—Pool based protocols to identify strength &amp; weaknesses. En <em>2023 Virtual Sessions: XIVth International Symposium for Biomechanics and Medicine in Swimming</em>.</li>
+      <li>Zamparo, P., &amp; Gatta, G. (2018). The energy cost of swimming and its determinants. <em>XIIIth International Symposium on Biomechanics and Medicine in Swimming Proceedings</em>, 26–30.</li>
+    </ol>
+  </aside>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <p>Trabajo de Fin de Grado &nbsp;·&nbsp; <strong>David Primo Cubel</strong> &nbsp;·&nbsp; Sistemas Energéticos en Natación</p>
+  </footer>
+
+  <script>
+    // ─── Modelo Rodríguez & Mader ───
+    function calcRoMa(t) {
+      const pcr = 424.1  * Math.pow(t, -0.789)  + 0.8296;
+      const glu = 239.7  * Math.pow(t, -0.4676) + 1.072;
+      const oxi = -585.6 * Math.pow(t, -0.6017) + 95.78;
+      return {
+        pcr: Math.max(0, +pcr.toFixed(2)),
+        glu: Math.max(0, +glu.toFixed(2)),
+        oxi: Math.max(0, +oxi.toFixed(2)),
+      };
+    }
+
+    // ─── Coste energético Capelli (KJ/m), v en m/s ───
+    function calcCapelli(v, estilo) {
+      switch (estilo) {
+        case 'mariposa': return 0.234 * Math.pow(10, 0.547 * v);
+        case 'espalda':  return 0.270 * Math.pow(10, 0.491 * v);
+        case 'braza':    return 0.548 * Math.pow(10, 0.355 * v);
+        case 'crol':
+        default:         return 0.228 * Math.pow(10, 0.488 * v);
+      }
+    }
+
+    // ─── Algoritmo completo 8 pasos (fiel al modelo Python del TFG) ───
+    function calcCompleto(distancia, tiempo, estilo, wrPrueba, wrCrol) {
+      // Paso 2: coste energético del estilo — redondeado a 2dp como en Python
+      const v     = distancia / tiempo;
+      const gasto = +calcCapelli(v, estilo).toFixed(2);
+
+      // Paso 3: Swimming Points — redondeado a entero como en Python
+      const sp1 = Math.round(1000 * Math.pow(wrPrueba / tiempo, 3));
+
+      // Paso 4: tiempo crol equivalente en SP (solución directa de la ecuación)
+      let tiempoCrol = wrCrol * Math.pow(1000 / sp1, 1 / 3);
+
+      // Paso 5: coste crol — redondeado a 2dp como en Python
+      const vCrol    = distancia / tiempoCrol;
+      const gastoCrol = +calcCapelli(vCrol, 'crol').toFixed(2);
+
+      // Paso 6: % de diferencia — redondeado a 2dp como en Python
+      const diferencia = +((gasto * 100 / gastoCrol) - 100).toFixed(2);
+
+      // Paso 7: aumentar la marca de crol en ese %
+      tiempoCrol = tiempoCrol + tiempoCrol * (diferencia / 100);
+
+      // Paso 8: contribución energética para el tiempo crol ajustado
+      return { ...calcRoMa(tiempoCrol), tiempoCrolAdj: +tiempoCrol.toFixed(2) };
+    }
+
+    // ─── Helpers UI ───
+    function showError(errEl, show) {
+      errEl.classList.toggle('visible', show);
+    }
+
+    function animateBar(id, widthPct) {
+      const el = document.getElementById(id);
+      el.style.width = '0%';
+      el.getBoundingClientRect(); // force reflow so CSS transition fires
+      el.style.width = Math.max(0, Math.min(100, widthPct)) + '%';
+    }
+
+    function renderBars(prefix, pcr, glu, oxi) {
+      const fmt = v => v.toFixed(2) + ' %';
+      document.getElementById(prefix + '-pcr-val').textContent = fmt(pcr);
+      document.getElementById(prefix + '-glu-val').textContent = fmt(glu);
+      document.getElementById(prefix + '-oxi-val').textContent = fmt(oxi);
+      animateBar(prefix + '-pcr-bar', pcr);
+      animateBar(prefix + '-glu-bar', glu);
+      animateBar(prefix + '-oxi-bar', oxi);
+    }
+
+    // ─── Calculadora 1 ───
+    document.getElementById('c1-btn').addEventListener('click', () => {
+      const t      = parseFloat(document.getElementById('c1-tiempo').value);
+      const errEl  = document.getElementById('c1-error');
+      const resEl  = document.getElementById('c1-results');
+
+      if (!t || t < 10 || t > 1800) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const { pcr, glu, oxi } = calcRoMa(t);
+      resEl.classList.add('visible');
+      renderBars('c1', pcr, glu, oxi);
+    });
+
+    // ─── Calculadora 2 ───
+    document.getElementById('c2-btn').addEventListener('click', () => {
+      const dist   = parseFloat(document.getElementById('c2-dist').value);
+      const t      = parseFloat(document.getElementById('c2-tiempo').value);
+      const estilo = document.getElementById('c2-estilo').value;
+      const errEl  = document.getElementById('c2-error');
+      const resEl  = document.getElementById('c2-results');
+
+      if (!dist || !t || dist <= 0 || t <= 0) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const v         = dist / t;
+      const gasto     = calcCapelli(v, estilo);
+      const gastoCrol = calcCapelli(v, 'crol');
+      const diffPct   = ((gasto / gastoCrol) - 1) * 100;
+      const maxVal    = Math.max(gasto, gastoCrol) * 1.1;
+
+      document.getElementById('c2-estilo-label').textContent =
+        estilo.charAt(0).toUpperCase() + estilo.slice(1);
+      document.getElementById('c2-cost-val').textContent  = gasto.toFixed(3) + ' KJ/m';
+      document.getElementById('c2-crol-val').textContent  = gastoCrol.toFixed(3) + ' KJ/m';
+      const crolRow = document.getElementById('c2-crol-row');
+      crolRow.style.display = estilo === 'crol' ? 'none' : 'block';
+
+      const noteEl = document.getElementById('c2-diff-note');
+      if (estilo !== 'crol') {
+        const signo = diffPct >= 0 ? '+' : '';
+        noteEl.textContent = `${estilo.charAt(0).toUpperCase() + estilo.slice(1)} consume un ${signo}${diffPct.toFixed(2)} % más energía por metro que crol a la misma velocidad.`;
+      } else {
+        noteEl.textContent = '';
+      }
+
+      resEl.classList.add('visible');
+      animateBar('c2-cost-bar', gasto / maxVal * 100);
+      animateBar('c2-crol-bar', gastoCrol / maxVal * 100);
+    });
+
+    // ─── Calculadora 3 ───
+    document.getElementById('c3-btn').addEventListener('click', () => {
+      const dist     = parseFloat(document.getElementById('c3-dist').value);
+      const t        = parseFloat(document.getElementById('c3-tiempo').value);
+      const estilo   = document.getElementById('c3-estilo').value;
+      const wrPrueba = parseFloat(document.getElementById('c3-wr-prueba').value);
+      const wrCrol   = parseFloat(document.getElementById('c3-wr-crol').value);
+      const errEl    = document.getElementById('c3-error');
+      const resEl    = document.getElementById('c3-results');
+
+      if (!dist || !t || !wrPrueba || !wrCrol || dist <= 0 || t <= 0 || wrPrueba <= 0 || wrCrol <= 0) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const { pcr, glu, oxi, tiempoCrolAdj } = calcCompleto(dist, t, estilo, wrPrueba, wrCrol);
+      resEl.classList.add('visible');
+      renderBars('c3', pcr, glu, oxi);
+
+      const mins = Math.floor(tiempoCrolAdj / 60);
+      const secs = (tiempoCrolAdj % 60).toFixed(2).padStart(5, '0');
+      document.getElementById('c3-equiv-note').textContent =
+        `Tiempo equivalente a crol ajustado: ${mins > 0 ? mins + ':' : ''}${secs} s. ` +
+        `Basado en Swimming Points y coste energético por metro (Capelli).`;
+
+    });
+
+    // ─── Bibliografía flotante ───
+    const bibBtn     = document.getElementById('bib-btn');
+    const bibModal   = document.getElementById('bib-modal');
+    const bibOverlay = document.getElementById('bib-overlay');
+    const bibClose   = document.getElementById('bib-close');
+
+    function openBib()  { bibModal.removeAttribute('hidden'); bibOverlay.removeAttribute('hidden'); }
+    function closeBib() { bibModal.setAttribute('hidden', ''); bibOverlay.setAttribute('hidden', ''); }
+
+    bibBtn.addEventListener('click', openBib);
+    bibClose.addEventListener('click', closeBib);
+    bibOverlay.addEventListener('click', closeBib);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBib(); });
+
+    // ─── IntersectionObserver: fade-in al hacer scroll ───
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('section').forEach(el => {
+      el.classList.add('fade-section');
+      io.observe(el);
+    });
+
+    // Hero aparece sin esperar scroll
+    const hero = document.querySelector('.hero');
+    if (hero) hero.classList.add('is-visible');
+
+    // ─── Nav: sombra al hacer scroll + enlace activo ───
+    const navEl    = document.querySelector('nav');
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    const navLinks = Array.from(document.querySelectorAll('nav ul li a'));
+
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 10);
+
+      const scrollMid = window.scrollY + window.innerHeight * 0.35;
+      let current = sections[0];
+      sections.forEach(s => {
+        if (s.offsetTop <= scrollMid) current = s;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current?.id);
+      });
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
