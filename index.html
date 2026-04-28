@@ -146,6 +146,236 @@
       transform: translateY(-1px);
     }
 
+    /* ─── Hero ─── */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 3.5rem 2.5rem;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      opacity: 0.92;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ─── Sections ─── */
+    .section {
+      margin-bottom: 3rem;
+    }
+
+    .section p {
+      margin-bottom: 0.9rem;
+      color: var(--color-text-muted);
+    }
+
+    .section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section strong {
+      color: var(--color-text);
+    }
+
+    /* ─── Energy system cards ─── */
+    .systems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .system-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.4rem 1.6rem;
+      border-top: 4px solid var(--color-secondary);
+    }
+
+    .system-card.anaerobic { border-top-color: #ef233c; }
+    .system-card.glycolytic { border-top-color: #f77f00; }
+    .system-card.oxidative { border-top-color: #2d6a4f; }
+
+    .system-card h3 {
+      font-size: 1.05rem;
+      color: var(--color-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .system-card .badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.15rem 0.55rem;
+      border-radius: 20px;
+      margin-bottom: 0.6rem;
+    }
+
+    .badge-anaerobic { background: #fde8ea; color: #c1121f; }
+    .badge-aerobic   { background: #d8f3dc; color: #1b4332; }
+
+    .system-card p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    /* ─── Tables ─── */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--color-surface);
+      font-size: 0.92rem;
+    }
+
+    thead th {
+      background: var(--color-primary);
+      color: #fff;
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) { background: #f0f8ff; }
+    tbody tr:hover { background: #ddf3ff; }
+
+    tbody td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid #e2eef7;
+      color: var(--color-text-muted);
+    }
+
+    tbody td:first-child {
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* ─── Controversy highlight ─── */
+    .controversy-box {
+      background: #fff8e1;
+      border-left: 4px solid #f4a261;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .controversy-box p { color: #5c4a1e; margin-bottom: 0.5rem; }
+    .controversy-box p:last-child { margin-bottom: 0; }
+
+    /* ─── Numbered problem list ─── */
+    .problem-list {
+      list-style: none;
+      margin: 1.2rem 0;
+    }
+
+    .problem-list li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1rem 1.2rem;
+    }
+
+    .problem-list .num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .problem-list .text { font-size: 0.9rem; color: var(--color-text-muted); }
+    .problem-list .text strong { color: var(--color-text); }
+
+    /* ─── Solution box ─── */
+    .solution-box {
+      background: #e8f5e9;
+      border-left: 4px solid #2d6a4f;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      color: #1b4332;
+    }
+
+    /* ─── Limitations list ─── */
+    .limit-list {
+      list-style: none;
+      margin: 1.2rem 0;
+      counter-reset: limit-counter;
+    }
+
+    .limit-list li {
+      counter-increment: limit-counter;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+    }
+
+    .limit-list li::before {
+      content: counter(limit-counter);
+      flex-shrink: 0;
+      width: 1.6rem;
+      height: 1.6rem;
+      background: #ef233c;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    /* ─── Conclusion card ─── */
+    .conclusion-card {
+      background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .conclusion-card p { opacity: 0.93; margin-bottom: 0.8rem; }
+    .conclusion-card p:last-child { margin-bottom: 0; }
+    .conclusion-card .signature {
+      margin-top: 1.2rem;
+      font-weight: 700;
+      font-style: italic;
+      opacity: 1;
+    }
+
     /* ─── Responsive ─── */
     @media (max-width: 640px) {
       nav ul {
@@ -168,18 +398,216 @@
   <nav>
     <span class="nav-brand">Sistemas Energéticos en Natación</span>
     <ul>
-      <!-- Los ítems del menú se añadirán aquí -->
+      <li><a href="#sistemas">Sistemas</a></li>
+      <li><a href="#controversia">Controversia</a></li>
+      <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#limitaciones">Limitaciones</a></li>
     </ul>
   </nav>
 
   <!-- ═══ Main content ═══ -->
   <main id="content">
-    <!-- Las secciones del TFG se insertarán aquí -->
+    <!-- ── HERO ── -->
+    <section class="hero">
+      <h1>Sistemas Energéticos en Natación</h1>
+      <p>El rendimiento en natación depende, principalmente, de la potencia metabólica que los deportistas son capaces de producir en competición y del coste energético que les supone nadar a máxima velocidad. Aquí abordamos el primero de esos factores: la producción de energía.</p>
+    </section>
+
+    <!-- ── SISTEMAS ENERGÉTICOS ── -->
+    <section id="sistemas" class="section">
+      <h2 class="section-title">¿Cómo obtenemos energía?</h2>
+      <p>Existe una molécula llamada <strong>Adenosín trifosfato (ATP)</strong> que contiene gran cantidad de energía y se almacena en las células. Cuando se rompe la libera, y esa es la principal fuente de energía de la mayoría de funciones del cuerpo, incluida la contracción muscular.</p>
+      <p>Hay tres caminos para obtenerla. Los dos primeros actúan sin utilizar oxígeno y forman el <strong>metabolismo anaeróbico</strong>; el tercero necesita oxígeno y comprende el <strong>metabolismo aeróbico</strong>. El cuerpo utiliza generalmente una combinación de los tres, a diferentes niveles, para alcanzar sus demandas energéticas.</p>
+
+      <div class="systems-grid">
+        <div class="system-card anaerobic">
+          <span class="badge badge-anaerobic">Anaeróbico</span>
+          <h3>ATP-PCr</h3>
+          <p>Utiliza directamente la pequeña reserva de ATP y fosfocreatina almacenadas en las células para producir energía <strong>muy</strong> rápido. El problema es que dura muy poco: a los <strong>12–15 segundos</strong> esas reservas están prácticamente esquilmadas.</p>
+        </div>
+        <div class="system-card glycolytic">
+          <span class="badge badge-anaerobic">Anaeróbico</span>
+          <h3>Sistema Glucolítico</h3>
+          <p>Rompe moléculas de glucosa. No produce grandes cantidades de energía, pero es <strong>rápido</strong> y dispone de más combustible que el ATP-PCr. Es el sistema predominante entre los <strong>15 segundos y los dos minutos</strong> de esfuerzo máximo. Este sistema es el que produce el famoso lactato.</p>
+        </div>
+        <div class="system-card oxidative">
+          <span class="badge badge-aerobic">Aeróbico</span>
+          <h3>Sistema Oxidativo</h3>
+          <p>El más complejo de los tres. Rompe sustratos (carbohidratos, grasas o proteínas) con ayuda del oxígeno. Dependiendo del sustrato produce más o menos energía, y durante más o menos tiempo. Es el sistema dominante en esfuerzos de duración media-larga.</p>
+        </div>
+      </div>
+
+      <p>Es importante recordar que <strong>todos están activos simultáneamente</strong>, solo que en diferentes grados de prioridad dependiendo del carácter del esfuerzo y del sustrato disponible.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Sistema Energético</th>
+              <th>¿Necesita oxígeno?</th>
+              <th>Potencia energética</th>
+              <th>Capacidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ATP-PCr</td>
+              <td>No</td>
+              <td>10</td>
+              <td>~15 s</td>
+            </tr>
+            <tr>
+              <td>Sistema Glucolítico</td>
+              <td>No</td>
+              <td>5</td>
+              <td>1–2 minutos</td>
+            </tr>
+            <tr>
+              <td>Sistema Oxidativo (carbos)</td>
+              <td>Sí</td>
+              <td>2,5</td>
+              <td>~90 minutos</td>
+            </tr>
+            <tr>
+              <td>Sistema Oxidativo (grasas)</td>
+              <td>Sí</td>
+              <td>1,5</td>
+              <td>Días</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ── CONTROVERSIA ── -->
+    <section id="controversia" class="section">
+      <h2 class="section-title">La Controversia</h2>
+      <p>El nadador debe obtener energía —mucha, cuanta más mejor— de los sistemas energéticos predominantes en su modalidad. Maglischo, Navarro y un sinfín de autores reconocidos han escrito al respecto. Esta es una tabla resumen de sus resultados:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Distancia</th>
+              <th>ATP-PCr (%)</th>
+              <th>S. Glucolítico (%)</th>
+              <th>S. Oxidativo (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50 m</td><td>15–80</td><td>2–80</td><td>2–26</td></tr>
+            <tr><td>100 m</td><td>5–28</td><td>15–65</td><td>5–54</td></tr>
+            <tr><td>200 m</td><td>2–30</td><td>25–65</td><td>5–65</td></tr>
+            <tr><td>400 m</td><td>0–20</td><td>10–55</td><td>25–83</td></tr>
+            <tr><td>800 m</td><td>0–5</td><td>25–30</td><td>65–83</td></tr>
+            <tr><td>1500 m</td><td>0–10</td><td>15–20</td><td>78–90</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="controversy-box">
+        <p><strong>¿Veis el problema?</strong> Yo creo que hay varios:</p>
+      </div>
+
+      <ul class="problem-list">
+        <li>
+          <div class="num">1</div>
+          <div class="text"><strong>No coinciden.</strong> El rango en el que se mueven es demasiado grande para resultar de utilidad. ¿Es el 200 libres una prueba eminentemente anaeróbica, o por el contrario prima el metabolismo aeróbico? Resulta imposible dar una respuesta particular; diferentes deportistas pueden llegar al mismo destino de formas distintas, ¿pero cómo es en general la prueba?</div>
+        </li>
+        <li>
+          <div class="num">2</div>
+          <div class="text"><strong>Usan distancias</strong> en vez de tiempo. Esto puede ser práctico en rasgos generales, pero no es preciso en casos concretos. La contribución del sistema ATP-PCr no es la misma para un 100 libres en 46 segundos que para uno en 1 minuto y 10 segundos, aunque sea la misma distancia y estilo.</div>
+        </li>
+        <li>
+          <div class="num">3</div>
+          <div class="text"><strong>Hablan exclusivamente de nado crol y en hombres.</strong> Sabemos que en mujeres la oxidación de lípidos se ve más favorecida frente a la de carbohidratos que en hombres, pero es una incógnita cómo se comportan respecto a los otros sistemas en natación.</div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── SOLUCIONES ── -->
+    <section id="soluciones" class="section">
+      <h2 class="section-title">Soluciones</h2>
+
+      <h3 style="color:var(--color-primary);margin-bottom:.6rem;">Problema 1: discrepancias entre autores</h3>
+      <p>La primera solución que se me ocurrió fue hacer una media, pero este enfoque podría llevar a una falacia: sin certeza de que todos los estudios tengan el mismo grado de validez, la media podría ser tan acertada como elegir un valor al azar en el rango correspondiente.</p>
+      <p>La alternativa: <strong>tener un favorito</strong>. En la literatura científica, y en especial en España y en el mundo de la natación, Fernando Navarro siempre es el primero en salir. Pero para este supuesto me inclino por <strong>Rodríguez y Mader</strong>. En su artículo <em>Energy systems in swimming</em> presentan una simulación computacional de la participación de los sistemas energéticos en nadadores de élite masculinos. Lo que me parece muy importante —y es un punto a su favor— es que <strong>incluyen marcas de tiempo</strong>:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Distancia</th>
+              <th>Duración (min:s)</th>
+              <th>ATP-PCr (%)</th>
+              <th>S. Glucolítico (%)</th>
+              <th>S. Oxidativo (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>50 m</td><td>0:22.0</td><td>38</td><td>58</td><td>4</td></tr>
+            <tr><td>100 m</td><td>0:48.0</td><td>20</td><td>39</td><td>41</td></tr>
+            <tr><td>200 m</td><td>1:45.0</td><td>13</td><td>29</td><td>58</td></tr>
+            <tr><td>400 m</td><td>3:45.0</td><td>6</td><td>21</td><td>73</td></tr>
+            <tr><td>800 m</td><td>7:50.0</td><td>4</td><td>14</td><td>82</td></tr>
+            <tr><td>1500 m</td><td>14:50.0</td><td>3</td><td>11</td><td>86</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="solution-box">
+        Esto <strong>soluciona por completo el Problema 1 y facilita mucho atajar el Problema 2</strong>: ahora disponemos de valores concretos ubicados en un tiempo también concreto.
+      </div>
+
+      <h3 style="color:var(--color-primary);margin:.1.5rem 0 .6rem;">Problema 2: esfuerzos de diferente duración</h3>
+      <p>Los datos de Rodríguez y Mader son para tiempos de élite masculinos en crol. Para una nadadora de 100 braza en 1:15, ese tiempo se aleja del modelo original. La solución: <strong>modelar una función continua</strong> a partir de los puntos de la tabla anterior. Con esa función podemos obtener el valor exacto para cualquier instante de esfuerzo.</p>
+      <p>Las ecuaciones resultantes (ajuste en MatLAB, R² ≥ 0,995), donde <em>x</em> es el tiempo total de la prueba en segundos, son:</p>
+
+      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+        <div><strong>ATP-PCr:</strong> 424,1 · x<sup>−0,789</sup> + 0,8296</div>
+        <div><strong>Sistema Glucolítico:</strong> 239,7 · x<sup>−0,4676</sup> + 1,072</div>
+        <div><strong>Sistema Oxidativo:</strong> −585,6 · x<sup>−0,6017</sup> + 95,78</div>
+      </div>
+
+      <h3 style="color:var(--color-primary);margin:1.5rem 0 .6rem;">Problema 3: diferentes estilos</h3>
+      <p>¿Requiere la misma cantidad de energía nadar 75 segundos a crol que a braza? La respuesta es no. Gracias a <strong>Capelli y colaboradores</strong> sabemos que el coste energético varía significativamente entre estilos. Sus ecuaciones (donde <em>x</em> es la velocidad en m/s):</p>
+
+      <div class="card" style="font-family:monospace;font-size:.92rem;line-height:2;">
+        <div><strong>Mariposa:</strong> 0,234 · 10<sup>0,547x</sup></div>
+        <div><strong>Espalda:</strong> 0,270 · 10<sup>0,491x</sup></div>
+        <div><strong>Braza:</strong> 0,548 · 10<sup>0,355x</sup></div>
+        <div><strong>Crol:</strong> 0,228 · 10<sup>0,488x</sup></div>
+      </div>
+
+      <p style="margin-top:1rem;">Con esto, el algoritmo completo compara el coste energético entre estilos usando <strong>Swimming Points</strong> como proxy de intensidad relativa, y ajusta el tiempo equivalente a crol antes de aplicar las ecuaciones de Rodríguez y Mader.</p>
+    </section>
+
+    <!-- ── LIMITACIONES Y CONCLUSIONES ── -->
+    <section id="limitaciones" class="section">
+      <h2 class="section-title">Limitaciones y Conclusiones</h2>
+
+      <p>Todo esto está cogido con muchas pinzas. Se basa en una serie de axiomas y asunciones que no tienen por qué ser válidos:</p>
+
+      <ul class="limit-list">
+        <li>El modelo computerizado de Rodríguez y Mader representa correctamente la interacción de los sistemas energéticos a lo largo del tiempo en natación.</li>
+        <li>Las ecuaciones de Capelli son por lo general correctas para la mayoría de deportistas. La biomecánica, antropometría y otros muchos factores pueden alterar el coste energético del nado de un deportista concreto.</li>
+        <li>Los Swimming Points sirven para equiparar rendimiento. No lo son: solo tienen en cuenta los récords del mundo, y asumen que los récords de todos los eventos representan el mismo nivel de dificultad. El 200 libres de Biedermann en 2009 (1:42.00) aún sigue vigente, mientras que el récord del mundo de 200 braza masculino de la misma época ha sido batido 48 veces desde entonces.</li>
+        <li>La contribución de los sistemas energéticos a intensidades similares es la misma en mujeres que en hombres.</li>
+      </ul>
+
+      <div class="conclusion-card">
+        <p>Pese a que creo que este es un asunto que damos por básico —contenido aprendido—, en mi opinión estamos lejos de caracterizar correctamente y con consenso los distintos esfuerzos a los que el global de los nadadores se enfrenta. No podremos hacerlo hasta que podamos medirlo de forma individual, pero pienso que no deberíamos conformarnos con el cuerpo de conocimiento en este área en su estado actual.</p>
+        <p>Este ha sido mi humilde método para tratar de acercarme un poco más a lo que creo que debe ser la verdad. He intentado tener en cuenta los factores más básicos que creo que pueden influir, pero hay muchos obstáculos y pocas certezas. Pese a todo, creo que es posible que los cálculos efectuados estén más cerca de la verdad que simplemente coger el valor correspondiente de alguna distancia de crol y darlo por bueno.</p>
+        <p>Si has llegado hasta aquí, y has hecho el esfuerzo de intentar comprender y razonar conmigo, te estoy muy agradecido. Estaré encantado de saber tu opinión.</p>
+        <p class="signature">— David Primo Cubel</p>
+      </div>
+    </section>
   </main>
 
   <!-- ═══ Footer ═══ -->
   <footer>
-    <!-- Información del pie de página se añadirá aquí -->
+    <p>Trabajo de Fin de Grado — <strong>David Primo Cubel</strong> &nbsp;·&nbsp; Sistemas Energéticos en Natación</p>
+    <p style="margin-top:.4rem;font-size:.78rem;opacity:.7;">Basado en: Rodríguez &amp; Mader (2003) · Capelli et al. (1998) · Maglischo · Navarro</p>
   </footer>
 
   <script>
