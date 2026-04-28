@@ -376,6 +376,164 @@
       opacity: 1;
     }
 
+    /* ─── Calculadoras ─── */
+    .calc-section {
+      margin-bottom: 3rem;
+    }
+
+    .calc-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.8rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .calc-card h3 {
+      font-size: 1.15rem;
+      color: var(--color-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .calc-card .calc-desc {
+      font-size: 0.88rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 0.55rem 0.8rem;
+      border: 1.5px solid #cce4f0;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      background: #f8fcff;
+      transition: border-color var(--transition);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--color-secondary);
+      background: #fff;
+    }
+
+    .calc-btn {
+      padding: 0.6rem 1.6rem;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .calc-btn:hover {
+      background: var(--color-secondary);
+      transform: translateY(-1px);
+    }
+
+    .calc-results {
+      margin-top: 1.4rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e2eef7;
+      display: none;
+    }
+
+    .calc-results.visible { display: block; }
+
+    .calc-results .results-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .result-item {
+      margin-bottom: 0.9rem;
+    }
+
+    .result-item:last-of-type { margin-bottom: 0; }
+
+    .result-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25rem;
+    }
+
+    .result-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .result-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .result-bar-track {
+      height: 10px;
+      background: #e2eef7;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .result-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.5s ease;
+    }
+
+    .bar-pcr      { background: #ef233c; }
+    .bar-glu      { background: #f4a261; }
+    .bar-oxi      { background: #2d6a4f; }
+    .bar-cost     { background: var(--color-primary); }
+
+    .result-note {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+      font-style: italic;
+    }
+
+    .calc-error {
+      color: #c1121f;
+      font-size: 0.88rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .calc-error.visible { display: block; }
+
     /* ─── Responsive ─── */
     @media (max-width: 640px) {
       nav ul {
@@ -401,6 +559,7 @@
       <li><a href="#sistemas">Sistemas</a></li>
       <li><a href="#controversia">Controversia</a></li>
       <li><a href="#soluciones">Soluciones</a></li>
+      <li><a href="#calculadoras">Calculadoras</a></li>
       <li><a href="#limitaciones">Limitaciones</a></li>
     </ul>
   </nav>
@@ -583,7 +742,159 @@
     </section>
 
     <!-- ── LIMITACIONES Y CONCLUSIONES ── -->
-    <section id="limitaciones" class="section">
+    <!-- ── CALCULADORAS ── -->
+    <section id="calculadoras" class="calc-section">
+      <h2 class="section-title">Calculadoras</h2>
+
+      <!-- Calc 1: Sistemas energéticos crol -->
+      <div class="calc-card" id="calc-basica">
+        <h3>Contribución por tiempo (crol, Rodríguez &amp; Mader)</h3>
+        <p class="calc-desc">Introduce el tiempo de la prueba en segundos y obtén la contribución estimada de cada sistema energético según el modelo de Rodríguez &amp; Mader.</p>
+        <div class="form-grid" style="grid-template-columns: 200px 1fr;">
+          <div class="form-group">
+            <label for="c1-tiempo">Tiempo (s)</label>
+            <input type="number" id="c1-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 48">
+          </div>
+        </div>
+        <button class="calc-btn" id="c1-btn">Calcular</button>
+        <p class="calc-error" id="c1-error">Introduce un tiempo válido (entre 10 y 1800 s).</p>
+        <div class="calc-results" id="c1-results">
+          <p class="results-title">Contribución estimada</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">ATP-PCr</span>
+              <span class="result-value" id="c1-pcr-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-pcr" id="c1-pcr-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Glucolítico</span>
+              <span class="result-value" id="c1-glu-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-glu" id="c1-glu-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Oxidativo</span>
+              <span class="result-value" id="c1-oxi-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c1-oxi-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note">Modelo válido para crol masculino de élite. Los valores son porcentajes de contribución energética.</p>
+        </div>
+      </div>
+      <!-- /Calc 1 -->
+
+      <!-- Calc 2: Coste energético Capelli -->
+      <div class="calc-card" id="calc-capelli">
+        <h3>Coste energético por estilo (Capelli)</h3>
+        <p class="calc-desc">Obtén el coste energético de nado en KJ/m para cualquier estilo y velocidad, y compáralo con crol.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="c2-dist">Distancia (m)</label>
+            <input type="number" id="c2-dist" min="25" max="1500" step="25" placeholder="ej. 100">
+          </div>
+          <div class="form-group">
+            <label for="c2-tiempo">Tiempo (s)</label>
+            <input type="number" id="c2-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 75">
+          </div>
+          <div class="form-group">
+            <label for="c2-estilo">Estilo</label>
+            <select id="c2-estilo">
+              <option value="mariposa">Mariposa</option>
+              <option value="espalda">Espalda</option>
+              <option value="braza">Braza</option>
+              <option value="crol" selected>Crol</option>
+            </select>
+          </div>
+        </div>
+        <button class="calc-btn" id="c2-btn">Calcular</button>
+        <p class="calc-error" id="c2-error">Introduce valores válidos de distancia y tiempo.</p>
+        <div class="calc-results" id="c2-results">
+          <p class="results-title">Coste energético</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name" id="c2-estilo-label">—</span>
+              <span class="result-value" id="c2-cost-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-cost" id="c2-cost-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item" id="c2-crol-row">
+            <div class="result-label">
+              <span class="result-name">Crol (misma velocidad)</span>
+              <span class="result-value" id="c2-crol-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c2-crol-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note" id="c2-diff-note"></p>
+        </div>
+      </div>
+      <!-- /Calc 2 -->
+
+      <!-- Calc 3: Algoritmo completo -->
+      <div class="calc-card" id="calc-completa">
+        <h3>Contribución ajustada al estilo (algoritmo completo)</h3>
+        <p class="calc-desc">Combina el modelo de Rodríguez &amp; Mader con el coste de Capelli y Swimming Points para estimar la contribución energética en cualquier estilo. Necesita los récords del mundo de la prueba y del mismo recorrido a crol.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="c3-dist">Distancia (m)</label>
+            <input type="number" id="c3-dist" min="25" max="1500" step="25" placeholder="ej. 100">
+          </div>
+          <div class="form-group">
+            <label for="c3-tiempo">Tu tiempo (s)</label>
+            <input type="number" id="c3-tiempo" min="10" max="1800" step="0.1" placeholder="ej. 75">
+          </div>
+          <div class="form-group">
+            <label for="c3-estilo">Estilo</label>
+            <select id="c3-estilo">
+              <option value="mariposa">Mariposa</option>
+              <option value="espalda">Espalda</option>
+              <option value="braza" selected>Braza</option>
+              <option value="crol">Crol</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="c3-wr-prueba">RM prueba (s)</label>
+            <input type="number" id="c3-wr-prueba" min="10" max="1800" step="0.01" placeholder="ej. 64.13">
+          </div>
+          <div class="form-group">
+            <label for="c3-wr-crol">RM crol misma dist. (s)</label>
+            <input type="number" id="c3-wr-crol" min="10" max="1800" step="0.01" placeholder="ej. 51.71">
+          </div>
+        </div>
+        <button class="calc-btn" id="c3-btn">Calcular</button>
+        <p class="calc-error" id="c3-error">Introduce todos los valores correctamente.</p>
+        <div class="calc-results" id="c3-results">
+          <p class="results-title">Contribución estimada (ajustada al estilo)</p>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">ATP-PCr</span>
+              <span class="result-value" id="c3-pcr-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-pcr" id="c3-pcr-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Glucolítico</span>
+              <span class="result-value" id="c3-glu-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-glu" id="c3-glu-bar" style="width:0%"></div></div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">
+              <span class="result-name">Sistema Oxidativo</span>
+              <span class="result-value" id="c3-oxi-val">—</span>
+            </div>
+            <div class="result-bar-track"><div class="result-bar-fill bar-oxi" id="c3-oxi-bar" style="width:0%"></div></div>
+          </div>
+          <p class="result-note" id="c3-equiv-note"></p>
+        </div>
+      </div>
+      <!-- /Calc 3 -->
+
+    </section>
+    <!-- /CALCULADORAS -->
       <h2 class="section-title">Limitaciones y Conclusiones</h2>
 
       <p>Todo esto está cogido con muchas pinzas. Se basa en una serie de axiomas y asunciones que no tienen por qué ser válidos:</p>
@@ -611,8 +922,156 @@
   </footer>
 
   <script>
-    // ─── App entry point ───
-    // Todo el JavaScript interactivo irá aquí
+    // ─── Modelo Rodríguez & Mader ───
+    function calcRoMa(t) {
+      const pcr = 424.1  * Math.pow(t, -0.789)  + 0.8296;
+      const glu = 239.7  * Math.pow(t, -0.4676) + 1.072;
+      const oxi = -585.6 * Math.pow(t, -0.6017) + 95.78;
+      return {
+        pcr: Math.max(0, +pcr.toFixed(2)),
+        glu: Math.max(0, +glu.toFixed(2)),
+        oxi: Math.max(0, +oxi.toFixed(2)),
+      };
+    }
+
+    // ─── Coste energético Capelli (KJ/m), v en m/s ───
+    function calcCapelli(v, estilo) {
+      switch (estilo) {
+        case 'mariposa': return 0.234 * Math.pow(10, 0.547 * v);
+        case 'espalda':  return 0.270 * Math.pow(10, 0.491 * v);
+        case 'braza':    return 0.548 * Math.pow(10, 0.355 * v);
+        case 'crol':
+        default:         return 0.228 * Math.pow(10, 0.488 * v);
+      }
+    }
+
+    // ─── Algoritmo completo 8 pasos ───
+    function calcCompleto(distancia, tiempo, estilo, wrPrueba, wrCrol) {
+      // 1. Velocidad y coste del estilo elegido
+      const v       = distancia / tiempo;
+      const gasto   = calcCapelli(v, estilo);
+
+      // 2. Swimming Points del tiempo dado
+      const sp1     = 1000 * Math.pow(wrPrueba / tiempo, 3);
+
+      // 3. Tiempo crol equivalente en SP (solución directa)
+      let tiempoCrol = wrCrol * Math.pow(1000 / sp1, 1 / 3);
+
+      // 4. Coste crol a ese tiempo equivalente
+      const vCrol   = distancia / tiempoCrol;
+      const gastoCrol = calcCapelli(vCrol, 'crol');
+
+      // 5. % diferencia de coste → ajuste del tiempo crol
+      const diferencia = (gasto / gastoCrol) - 1;
+      tiempoCrol = tiempoCrol * (1 + diferencia);
+
+      // 6. Contribución energética para el tiempo crol ajustado
+      return { ...calcRoMa(tiempoCrol), tiempoCrolAdj: +tiempoCrol.toFixed(2) };
+    }
+
+    // ─── Helpers UI ───
+    function showError(errEl, show) {
+      errEl.classList.toggle('visible', show);
+    }
+
+    function renderBars(prefix, pcr, glu, oxi) {
+      const fmt = v => v.toFixed(2) + ' %';
+      document.getElementById(prefix + '-pcr-val').textContent = fmt(pcr);
+      document.getElementById(prefix + '-glu-val').textContent = fmt(glu);
+      document.getElementById(prefix + '-oxi-val').textContent = fmt(oxi);
+      document.getElementById(prefix + '-pcr-bar').style.width = pcr + '%';
+      document.getElementById(prefix + '-glu-bar').style.width = glu + '%';
+      document.getElementById(prefix + '-oxi-bar').style.width = oxi + '%';
+    }
+
+    // ─── Calculadora 1 ───
+    document.getElementById('c1-btn').addEventListener('click', () => {
+      const t      = parseFloat(document.getElementById('c1-tiempo').value);
+      const errEl  = document.getElementById('c1-error');
+      const resEl  = document.getElementById('c1-results');
+
+      if (!t || t < 10 || t > 1800) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const { pcr, glu, oxi } = calcRoMa(t);
+      renderBars('c1', pcr, glu, oxi);
+      resEl.classList.add('visible');
+    });
+
+    // ─── Calculadora 2 ───
+    document.getElementById('c2-btn').addEventListener('click', () => {
+      const dist   = parseFloat(document.getElementById('c2-dist').value);
+      const t      = parseFloat(document.getElementById('c2-tiempo').value);
+      const estilo = document.getElementById('c2-estilo').value;
+      const errEl  = document.getElementById('c2-error');
+      const resEl  = document.getElementById('c2-results');
+
+      if (!dist || !t || dist <= 0 || t <= 0) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const v         = dist / t;
+      const gasto     = calcCapelli(v, estilo);
+      const gastoCrol = calcCapelli(v, 'crol');
+      const diffPct   = ((gasto / gastoCrol) - 1) * 100;
+      const maxVal    = Math.max(gasto, gastoCrol) * 1.1;
+
+      document.getElementById('c2-estilo-label').textContent =
+        estilo.charAt(0).toUpperCase() + estilo.slice(1);
+      document.getElementById('c2-cost-val').textContent  = gasto.toFixed(3) + ' KJ/m';
+      document.getElementById('c2-crol-val').textContent  = gastoCrol.toFixed(3) + ' KJ/m';
+      document.getElementById('c2-cost-bar').style.width  = (gasto / maxVal * 100) + '%';
+      document.getElementById('c2-crol-bar').style.width  = (gastoCrol / maxVal * 100) + '%';
+
+      const crolRow = document.getElementById('c2-crol-row');
+      crolRow.style.display = estilo === 'crol' ? 'none' : 'block';
+
+      const noteEl = document.getElementById('c2-diff-note');
+      if (estilo !== 'crol') {
+        const signo = diffPct >= 0 ? '+' : '';
+        noteEl.textContent = `${estilo.charAt(0).toUpperCase() + estilo.slice(1)} consume un ${signo}${diffPct.toFixed(2)} % más energía por metro que crol a la misma velocidad.`;
+      } else {
+        noteEl.textContent = '';
+      }
+
+      resEl.classList.add('visible');
+    });
+
+    // ─── Calculadora 3 ───
+    document.getElementById('c3-btn').addEventListener('click', () => {
+      const dist     = parseFloat(document.getElementById('c3-dist').value);
+      const t        = parseFloat(document.getElementById('c3-tiempo').value);
+      const estilo   = document.getElementById('c3-estilo').value;
+      const wrPrueba = parseFloat(document.getElementById('c3-wr-prueba').value);
+      const wrCrol   = parseFloat(document.getElementById('c3-wr-crol').value);
+      const errEl    = document.getElementById('c3-error');
+      const resEl    = document.getElementById('c3-results');
+
+      if (!dist || !t || !wrPrueba || !wrCrol || dist <= 0 || t <= 0 || wrPrueba <= 0 || wrCrol <= 0) {
+        showError(errEl, true);
+        resEl.classList.remove('visible');
+        return;
+      }
+      showError(errEl, false);
+
+      const { pcr, glu, oxi, tiempoCrolAdj } = calcCompleto(dist, t, estilo, wrPrueba, wrCrol);
+      renderBars('c3', pcr, glu, oxi);
+
+      const mins = Math.floor(tiempoCrolAdj / 60);
+      const secs = (tiempoCrolAdj % 60).toFixed(2).padStart(5, '0');
+      document.getElementById('c3-equiv-note').textContent =
+        `Tiempo equivalente a crol ajustado: ${mins > 0 ? mins + ':' : ''}${secs} s. ` +
+        `Basado en Swimming Points y coste energético por metro (Capelli).`;
+
+      resEl.classList.add('visible');
+    });
   </script>
 
 </body>
